@@ -1,0 +1,104 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.3.6">
+  <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
+    <mxGraphModel dx="1388" dy="619" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="exrDVZrWZAFKa5DIRRul-1" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;" value="" vertex="1">
+          <mxGeometry height="380" width="20" x="80" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="Camera" vertex="1">
+          <mxGeometry height="380" width="100" x="160" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="Face Recognition" vertex="1">
+          <mxGeometry height="380" width="100" x="310" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="Database" vertex="1">
+          <mxGeometry height="380" width="100" x="520" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-5" parent="1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" value="User" vertex="1">
+          <mxGeometry height="26" width="100" x="70" y="24" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-6" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" target="exrDVZrWZAFKa5DIRRul-2" value="Face Scan">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="90" y="120" as="sourcePoint" />
+            <mxPoint x="170" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-7" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" target="exrDVZrWZAFKa5DIRRul-3" value="Send Image Frame">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="210" y="140" as="sourcePoint" />
+            <mxPoint x="330" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-8" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" target="exrDVZrWZAFKa5DIRRul-4" value="Fetch UserBiometrics (template)">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="360" y="160" as="sourcePoint" />
+            <mxPoint x="480" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-9" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" target="exrDVZrWZAFKa5DIRRul-3" value="Return Template">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="569.5" y="190" as="sourcePoint" />
+            <mxPoint x="430" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-10" edge="1" parent="1" source="exrDVZrWZAFKa5DIRRul-3" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;" target="exrDVZrWZAFKa5DIRRul-3" value="Match Face Patterns">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="230" />
+              <mxPoint x="420" y="210" />
+            </Array>
+            <mxPoint x="360" y="230" as="sourcePoint" />
+            <mxPoint x="520" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-12" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=60;height=20;" value="alt" vertex="1">
+          <mxGeometry height="150" width="580" x="50" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-13" parent="1" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" value="Match Found (Confidence &amp;gt; 0.8)" vertex="1">
+          <mxGeometry height="26" width="80" x="170" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-14" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" value="Mark Attendance (Attendance_log)">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <mxPoint x="360" y="300" as="sourcePoint" />
+            <mxPoint x="570" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-15" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" value="Success">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="569.5" y="330" as="sourcePoint" />
+            <mxPoint x="360" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-16" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" value="Try Again">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="359.5" y="390.0000000000001" as="sourcePoint" />
+            <mxPoint x="90.02380952380946" y="390.0000000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-18" parent="1" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" value="Match Not Found" vertex="1">
+          <mxGeometry height="26" width="80" x="70" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-19" parent="1" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" value="" vertex="1">
+          <mxGeometry height="8" width="580" x="50" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-20" parent="1" style="html=1;whiteSpace=wrap;" value="Camera" vertex="1">
+          <mxGeometry height="40" width="100" x="160" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-21" edge="1" parent="1" source="exrDVZrWZAFKa5DIRRul-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="exrDVZrWZAFKa5DIRRul-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-22" parent="1" style="html=1;whiteSpace=wrap;" value="Database" vertex="1">
+          <mxGeometry height="40" width="100" x="520" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-23" parent="1" style="html=1;whiteSpace=wrap;" value="Face Recognition" vertex="1">
+          <mxGeometry height="40" width="100" x="310" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="exrDVZrWZAFKa5DIRRul-24" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="User" vertex="1">
+          <mxGeometry height="40" width="20" x="80" y="430" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

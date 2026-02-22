@@ -1,0 +1,106 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.whl
+*.pyo
+*.pyd
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+virtualenv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Database
+*.db
+*.sqlite3
+*.sqlite
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+
+# Logs
+logs/
+*.log
+
+# Uploads/Media
+uploads/
+media/
+temp/
+*.jpg
+*.jpeg
+*.png
+*.gif
+!placeholder.jpg
+
+# Machine Learning models
+*.pkl
+*.h5
+*.model
+*.pt
+*.pth
+*.onnx
+*.pb
+
+# Testing
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+*.cover
+*.hypothesis
+
+# Frontend dependencies
+node_modules/
+bower_components/
+package-lock.json
+yarn.lock
+
+# Project specific - based on your structure
+Code/backend/venv/
+Code/backend/.env
+Code/backend/*.log
+Code/Database/*.db
+Code/Database/*.sqlite3
+Documentation/*.pdf
+Documentation/*.docx
+Resources/**/*.tmp
+
+# Security
+*.key
+*.pem
+*.crt
+*.csr
