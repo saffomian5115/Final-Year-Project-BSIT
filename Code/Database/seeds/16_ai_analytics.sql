@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 16: AI ANALYTICS + CHATBOT INTENTS + FAQS
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 -- ── Student Performance Scores ───────────────────────
 -- Semester 4 (Spring 2025) analytics for main students

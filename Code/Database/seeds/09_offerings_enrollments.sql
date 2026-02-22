@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 09: COURSE OFFERINGS + ENROLLMENTS
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 -- ── Course Offerings (Spring 2025 = semester_id 4) ──
 INSERT INTO course_offerings

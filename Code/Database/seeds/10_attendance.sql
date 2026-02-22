@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 10: LECTURE SESSIONS + ATTENDANCE
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 -- ── Lecture Sessions (Offering 1 - Web Technologies) ─
 INSERT INTO lecture_sessions

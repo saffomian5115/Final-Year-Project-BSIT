@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 17: AI QUIZZES + CAMPUS ATTENDANCE LOGS
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 -- ── AI Practice Quiz History ─────────────────────────
 INSERT INTO ai_quizzes

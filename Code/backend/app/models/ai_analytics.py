@@ -91,7 +91,7 @@ class ChatbotMessage(Base):
     confidence = Column(DECIMAL(4, 3), nullable=True)
     timestamp = Column(TIMESTAMP, server_default=func.now())
     response_time_ms = Column(Integer, nullable=True)
-    metadata = Column(JSON, nullable=True)
+    message_metadata = Column(JSON, nullable=True)
 
     # Relationships
     conversation = relationship("ChatbotConversation", back_populates="messages")

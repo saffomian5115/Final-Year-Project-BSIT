@@ -3,7 +3,7 @@
 -- Password for all: Admin@123
 -- bcrypt hash of "Admin@123"
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 INSERT INTO users (id, roll_number, email, password_hash, role, is_active) VALUES
 (1, NULL, 'admin@bzu.edu.pk',

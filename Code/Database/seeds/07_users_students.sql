@@ -3,7 +3,7 @@
 -- Password for all: Student@123
 -- bcrypt hash of "Student@123"
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 INSERT INTO users (id, roll_number, email, password_hash, role, is_active) VALUES
 -- BSIT 2021 Batch

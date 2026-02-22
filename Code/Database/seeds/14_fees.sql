@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 14: FEE STRUCTURE + VOUCHERS + PAYMENTS
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 -- ── Fee Structure ────────────────────────────────────
 INSERT INTO fee_structure

@@ -1,7 +1,4 @@
--- =====================================================
--- SEED 01: DEPARTMENTS
--- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 INSERT INTO departments (id, name, code, description, head_of_department) VALUES
 (1, 'Information Technology', 'IT', 'Department of Information Technology', NULL),

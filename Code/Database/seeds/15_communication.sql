@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 15: ANNOUNCEMENTS + NOTICES + CHAT GROUPS
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 -- ── Announcements ────────────────────────────────────
 INSERT INTO announcements

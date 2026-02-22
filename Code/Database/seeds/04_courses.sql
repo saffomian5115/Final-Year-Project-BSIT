@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 04: COURSES
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 INSERT INTO courses (id, code, name, credit_hours, lecture_hours, lab_hours, description, department_id, program_id, semester_level, is_elective) VALUES
 -- BSIT Courses

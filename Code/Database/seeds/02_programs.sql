@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 02: PROGRAMS
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 INSERT INTO programs (id, name, code, department_id, duration_years, total_credit_hours, degree_type) VALUES
 (1, 'Bachelor of Science in Information Technology', 'BSIT', 1, 4, 130, 'BS'),

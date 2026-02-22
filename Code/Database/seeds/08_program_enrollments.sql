@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 08: STUDENT PROGRAM ENROLLMENTS
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 INSERT INTO student_program_enrollment
   (student_id, program_id, batch_year, enrollment_semester_id, current_semester, status, advisor_id, enrollment_date, expected_graduation)

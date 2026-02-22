@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 12: QUIZZES + QUESTIONS + ATTEMPTS
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 -- ── Quizzes ──────────────────────────────────────────
 INSERT INTO quizzes

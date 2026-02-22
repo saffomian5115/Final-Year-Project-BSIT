@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 11: ASSIGNMENTS + SUBMISSIONS
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 -- ── Assignments ──────────────────────────────────────
 INSERT INTO assignments

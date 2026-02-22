@@ -1,7 +1,7 @@
 -- =====================================================
 -- SEED 03: SEMESTERS
 -- =====================================================
-USE AI_Driven_SMart_LMS;
+USE AI_Driven_Smart_LMS;
 
 INSERT INTO semesters (id, name, code, start_date, end_date, is_active, registration_start, registration_end, add_drop_last_date) VALUES
 (1, 'Fall 2023',   'FALL-2023',   '2023-09-01', '2024-01-31', FALSE, '2023-08-15', '2023-09-10', '2023-09-20'),
