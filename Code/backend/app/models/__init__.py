@@ -17,3 +17,8 @@ from app.models.communication import (
     Announcement, NoticeBoard,
     ChatGroup, ChatGroupMember, Message
 )
+from app.models.ai_analytics import (
+    StudentPerformanceScore,
+    ChatbotIntent, ChatbotConversation,
+    ChatbotMessage, ChatbotFAQ
+)
