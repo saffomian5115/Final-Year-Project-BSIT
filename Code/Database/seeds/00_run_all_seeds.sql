@@ -77,15 +77,15 @@ USE AI_Driven_Smart_LMS;
 
 INSERT INTO users (id, roll_number, email, password_hash, role, is_active) VALUES
 (1, NULL, 'admin@bzu.edu.pk',
- '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TiGniCGGHNNEeJmA5uVdVKbQU7sC',
+ '$2b$12$.B0JSpE.0aluBkNcCgcGQOzm2S6tC5hrFQKBfQfcy/RRx/6RBTEuq',
  'admin', TRUE),
 
 (2, NULL, 'security@bzu.edu.pk',
- '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TiGniCGGHNNEeJmA5uVdVKbQU7sC',
+ '$2b$12$.B0JSpE.0aluBkNcCgcGQOzm2S6tC5hrFQKBfQfcy/RRx/6RBTEuq',
  'admin', TRUE),
 
 (3, NULL, 'gate.operator@bzu.edu.pk',
- '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TiGniCGGHNNEeJmA5uVdVKbQU7sC',
+ '$2b$12$.B0JSpE.0aluBkNcCgcGQOzm2S6tC5hrFQKBfQfcy/RRx/6RBTEuq',
  'admin', TRUE);
 
 INSERT INTO admin_profiles (user_id, employee_id, full_name, designation, phone, email_official, role_type) VALUES
@@ -101,23 +101,23 @@ USE AI_Driven_Smart_LMS;
 
 INSERT INTO users (id, roll_number, email, password_hash, role, is_active) VALUES
 (4, NULL, 'dr.kamran@bzu.edu.pk',
- '$2b$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+ '$2b$12$qz6Q0HsJOSUvj2qXLqcVSu0wsHvej5zn78/22BOXMgm2lMMXYgDx6',
  'teacher', TRUE),
 
 (5, NULL, 'ms.ayesha@bzu.edu.pk',
- '$2b$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+ '$2b$12$qz6Q0HsJOSUvj2qXLqcVSu0wsHvej5zn78/22BOXMgm2lMMXYgDx6',
  'teacher', TRUE),
 
 (6, NULL, 'mr.hassan@bzu.edu.pk',
- '$2b$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+ '$2b$12$qz6Q0HsJOSUvj2qXLqcVSu0wsHvej5zn78/22BOXMgm2lMMXYgDx6',
  'teacher', TRUE),
 
 (7, NULL, 'dr.fatima@bzu.edu.pk',
- '$2b$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+ '$2b$12$qz6Q0HsJOSUvj2qXLqcVSu0wsHvej5zn78/22BOXMgm2lMMXYgDx6',
  'teacher', TRUE),
 
 (8, NULL, 'mr.usman@bzu.edu.pk',
- '$2b$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+ '$2b$12$qz6Q0HsJOSUvj2qXLqcVSu0wsHvej5zn78/22BOXMgm2lMMXYgDx6',
  'teacher', TRUE);
 
 INSERT INTO teacher_profiles (user_id, employee_id, full_name, designation, qualification, specialization, joining_date, phone, email, cnic) VALUES
@@ -140,27 +140,27 @@ USE AI_Driven_Smart_LMS;
 
 INSERT INTO users (id, roll_number, email, password_hash, role, is_active) VALUES
 -- BSIT 2021 Batch
-(9,  'BSIT-21-01', 'ali.hassan@student.bzu.edu.pk',      '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(10, 'BSIT-21-02', 'sara.ahmed@student.bzu.edu.pk',      '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(11, 'BSIT-21-03', 'usman.malik@student.bzu.edu.pk',     '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(12, 'BSIT-21-04', 'fatima.khan@student.bzu.edu.pk',     '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(13, 'BSIT-21-05', 'bilal.qureshi@student.bzu.edu.pk',   '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(14, 'BSIT-21-06', 'zara.butt@student.bzu.edu.pk',       '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(15, 'BSIT-21-07', 'hamza.riaz@student.bzu.edu.pk',      '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(16, 'BSIT-21-08', 'nadia.iqbal@student.bzu.edu.pk',     '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(17, 'BSIT-21-09', 'tariq.mehmood@student.bzu.edu.pk',   '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(18, 'BSIT-21-10', 'amna.farooq@student.bzu.edu.pk',     '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
+(9,  'BSIT-21-01', 'ali.hassan@student.bzu.edu.pk',      '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(10, 'BSIT-21-02', 'sara.ahmed@student.bzu.edu.pk',      '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(11, 'BSIT-21-03', 'usman.malik@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(12, 'BSIT-21-04', 'fatima.khan@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(13, 'BSIT-21-05', 'bilal.qureshi@student.bzu.edu.pk',   '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(14, 'BSIT-21-06', 'zara.butt@student.bzu.edu.pk',       '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(15, 'BSIT-21-07', 'hamza.riaz@student.bzu.edu.pk',      '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(16, 'BSIT-21-08', 'nadia.iqbal@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(17, 'BSIT-21-09', 'tariq.mehmood@student.bzu.edu.pk',   '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(18, 'BSIT-21-10', 'amna.farooq@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
 
 -- BSIT 2022 Batch
-(19, 'BSIT-22-01', 'omar.sheikh@student.bzu.edu.pk',     '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(20, 'BSIT-22-02', 'hina.nawaz@student.bzu.edu.pk',      '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(21, 'BSIT-22-03', 'asad.ali@student.bzu.edu.pk',        '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(22, 'BSIT-22-04', 'sana.rehman@student.bzu.edu.pk',     '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(23, 'BSIT-22-05', 'danish.siddiqui@student.bzu.edu.pk', '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
+(19, 'BSIT-22-01', 'omar.sheikh@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(20, 'BSIT-22-02', 'hina.nawaz@student.bzu.edu.pk',      '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(21, 'BSIT-22-03', 'asad.ali@student.bzu.edu.pk',        '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(22, 'BSIT-22-04', 'sana.rehman@student.bzu.edu.pk',     '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(23, 'BSIT-22-05', 'danish.siddiqui@student.bzu.edu.pk', '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
 
 -- BSCS Batch
-(24, 'BSCS-21-01', 'raheel.aslam@student.bzu.edu.pk',    '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE),
-(25, 'BSCS-21-02', 'mehwish.javed@student.bzu.edu.pk',   '$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', 'student', TRUE);
+(24, 'BSCS-21-01', 'raheel.aslam@student.bzu.edu.pk',    '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE),
+(25, 'BSCS-21-02', 'mehwish.javed@student.bzu.edu.pk',   '$2b$12$oE61qDe.Wt/p3M6F4pNRweoYqJsBltm2TDYNF7201ORC4QbbQAFva', 'student', TRUE);
 
 INSERT INTO student_profiles
   (user_id, registration_number, full_name, father_name, date_of_birth, gender, cnic, phone, current_address, city, guardian_phone, guardian_relation)

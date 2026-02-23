@@ -2,7 +2,6 @@ from sqlalchemy import (
     Column, Integer, String, Boolean,
     Text, TIMESTAMP, ForeignKey,
     JSON, DECIMAL, Enum, Date,
-    Computed
 )
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
@@ -19,15 +18,13 @@ class FeeStructure(Base):
     admission_fee = Column(DECIMAL(10, 2), default=0)
     library_fee = Column(DECIMAL(10, 2), default=0)
     sports_fee = Column(DECIMAL(10, 2), default=0)
-    other_fees = Column(JSON)           # Extra fees JSON mein
+    other_fees = Column(JSON)
     valid_from = Column(Date, nullable=False)
     valid_to = Column(Date, nullable=True)
     created_at = Column(TIMESTAMP, server_default=func.now())
 
     # Relationships
     program = relationship("Program")
-    vouchers = relationship("FeeVoucher", back_populates="fee_structure_ref",
-                           foreign_keys="FeeVoucher.semester_id")
 
 
 class FeeVoucher(Base):
@@ -52,19 +49,12 @@ class FeeVoucher(Base):
     online_payment_data = Column(JSON, nullable=True)
     remarks = Column(Text, nullable=True)
     created_at = Column(TIMESTAMP, server_default=func.now())
-    updated_at = Column(TIMESTAMP, server_default=func.now(),
-                        onupdate=func.now())
+    updated_at = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now())
 
     # Relationships
     student = relationship("User", foreign_keys=[student_id])
     semester = relationship("Semester", foreign_keys=[semester_id])
     payments = relationship("FeePayment", back_populates="voucher")
-    fee_structure_ref = relationship(
-        "FeeStructure",
-        foreign_keys=[semester_id],
-        primaryjoin="FeeVoucher.semester_id == FeeStructure.id",
-        overlaps="vouchers"
-    )
 
 
 class FeePayment(Base):

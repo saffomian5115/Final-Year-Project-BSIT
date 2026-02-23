@@ -39,23 +39,10 @@ Complete seed data for development and testing of BZU LMS system.
 
 ## How to Run
 
-### Option 1: Run All at Once
 ```bash
 cd database/seeds/
 mysql -u root -p AI_Driven_SMart_LMS < 00_run_all_seeds.sql
 ```
-
-### Option 2: Run Individual Files
-```bash
-mysql -u root -p AI_Driven_SMart_LMS < 01_departments.sql
-mysql -u root -p AI_Driven_SMart_LMS < 02_programs.sql
-# ...and so on in order
-```
-
-### Option 3: MySQL Workbench
-Open each file and execute in order (01 → 17).
-
-## Test Scenarios Covered
 
 ### Attendance
 - **Student 10 (Sara)** → 100% attendance (best case)

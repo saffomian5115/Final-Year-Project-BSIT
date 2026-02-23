@@ -1,10 +1,12 @@
 from sqlalchemy import (
-    Column, Integer, String, Boolean, 
-    Enum, TIMESTAMP, Date, Text, BLOB
+    Column, Integer, String, Boolean,
+    Enum, TIMESTAMP, Date, Text, BLOB,
+    ForeignKey  # ← YEH ADD KARO
 )
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from app.core.database import Base
+
 
 class User(Base):
     __tablename__ = "users"
@@ -30,7 +32,7 @@ class User(Base):
 class StudentProfile(Base):
     __tablename__ = "student_profiles"
 
-    user_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)  # ← FIX
     registration_number = Column(String(50), unique=True)
     full_name = Column(String(100), nullable=False)
     father_name = Column(String(100))
@@ -55,7 +57,7 @@ class StudentProfile(Base):
 class TeacherProfile(Base):
     __tablename__ = "teacher_profiles"
 
-    user_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)  # ← FIX
     employee_id = Column(String(50), unique=True)
     full_name = Column(String(100), nullable=False)
     designation = Column(String(100))
@@ -76,14 +78,14 @@ class TeacherProfile(Base):
 class AdminProfile(Base):
     __tablename__ = "admin_profiles"
 
-    user_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"), primary_key=True)  # ← FIX
     employee_id = Column(String(50), unique=True)
     full_name = Column(String(100), nullable=False)
     designation = Column(String(100))
     phone = Column(String(20))
     email_official = Column(String(100))
     role_type = Column(
-        Enum("admin", "security_admin", "gate_operator"), 
+        Enum("admin", "security_admin", "gate_operator"),
         default="admin"
     )
     created_at = Column(TIMESTAMP, server_default=func.now())
