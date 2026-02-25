@@ -178,3 +178,56 @@ def grade_submission(
         "status": submission.status,
         "graded_at": str(submission.graded_at)
     }, "Submission graded successfully")
+
+@router.get("/students/{student_id}/submissions")
+def get_student_submissions(
+    student_id: int,
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user)
+):
+    # Student sirf apni submissions dekh sakta hai
+    if current_user.role == "student" and current_user.id != student_id:
+        return error_response("Access denied", "FORBIDDEN", 403)
+
+    from app.models.assessment import AssignmentSubmission, Assignment
+
+    submissions = db.query(AssignmentSubmission).filter(
+        AssignmentSubmission.student_id == student_id
+    ).order_by(AssignmentSubmission.submission_date.desc()).all()
+
+    result = []
+    for sub in submissions:
+        assignment = db.query(Assignment).filter(
+            Assignment.id == sub.assignment_id
+        ).first()
+        result.append({
+            "submission_id": sub.id,
+            "assignment_id": sub.assignment_id,
+            "assignment_title": assignment.title if assignment else None,
+            "offering_id": assignment.offering_id if assignment else None,
+            "submission_date": str(sub.submission_date),
+            "status": sub.status,
+            "obtained_marks": float(sub.obtained_marks) if sub.obtained_marks else None,
+            "total_marks": assignment.total_marks if assignment else None,
+            "feedback": sub.feedback,
+            "plagiarism_percentage": float(sub.plagiarism_percentage) if sub.plagiarism_percentage else None,
+        })
+
+    return success_response({
+        "student_id": student_id,
+        "total": len(result),
+        "submissions": result
+    }, "Student submissions retrieved")
+
+
+@router.delete("/assignments/{assignment_id}")
+def delete_assignment(
+    assignment_id: int,
+    db: Session = Depends(get_db),
+    current_user = Depends(require_teacher)
+):
+    success, error, status_code = AssignmentService.delete(db, assignment_id)
+    if error:
+        return error_response(error, "DELETE_FAILED", status_code=status_code)
+
+    return success_response(message="Assignment deleted successfully")

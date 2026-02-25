@@ -440,3 +440,59 @@ def get_student_campus_attendance(
         "total_records": len(data),
         "records": data
     }, "Campus attendance retrieved")
+
+@router.get("/offerings/{offering_id}/attendance-report")
+def get_attendance_report(
+    offering_id: int,
+    db: Session = Depends(get_db),
+    current_user = Depends(require_teacher)
+):
+    from app.models.attendance import LectureSession, LectureAttendance, AttendanceSummary
+    from app.models.enrollment import Enrollment
+    from app.models.user import StudentProfile
+
+    sessions = db.query(LectureSession).filter(
+        LectureSession.offering_id == offering_id
+    ).all()
+    total_sessions = len(sessions)
+    session_ids = [s.id for s in sessions]
+
+    enrollments = db.query(Enrollment).filter(
+        Enrollment.offering_id == offering_id,
+        Enrollment.status == "enrolled"
+    ).all()
+
+    report = []
+    for enrollment in enrollments:
+        student = enrollment.student
+        profile = db.query(StudentProfile).filter(
+            StudentProfile.user_id == enrollment.student_id
+        ).first()
+
+        attended = db.query(LectureAttendance).filter(
+            LectureAttendance.student_id == enrollment.student_id,
+            LectureAttendance.session_id.in_(session_ids),
+            LectureAttendance.status.in_(["present", "late"])
+        ).count()
+
+        percentage = round((attended / total_sessions * 100), 2) if total_sessions > 0 else 0.0
+
+        report.append({
+            "student_id": enrollment.student_id,
+            "roll_number": student.roll_number if student else None,
+            "full_name": profile.full_name if profile else None,
+            "total_sessions": total_sessions,
+            "attended": attended,
+            "absent": total_sessions - attended,
+            "percentage": percentage,
+            "status": "short" if percentage < 75 else "ok"
+        })
+
+    report.sort(key=lambda x: x["percentage"])
+
+    return success_response({
+        "offering_id": offering_id,
+        "total_sessions": total_sessions,
+        "total_students": len(report),
+        "report": report
+    }, "Attendance report retrieved")
