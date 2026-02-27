@@ -121,6 +121,15 @@ class ExamCreateRequest(BaseModel):
     end_time: Optional[str] = None
     room_number: Optional[str] = None
 
+class ExamUpdateRequest(BaseModel):
+    title: Optional[str] = None
+    total_marks: Optional[int] = None
+    weightage_percent: Optional[float] = None
+    exam_date: Optional[date] = None
+    start_time: Optional[str] = None
+    end_time: Optional[str] = None
+    room_number: Optional[str] = None
+
 class ExamResultEntryRequest(BaseModel):
     student_id: int
     obtained_marks: float
@@ -135,3 +144,13 @@ class ExamResultEntryRequest(BaseModel):
 
 class BulkExamResultRequest(BaseModel):
     results: List[ExamResultEntryRequest]
+
+class QuizUpdateRequest(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    total_marks: Optional[int] = None
+    time_limit_minutes: Optional[int] = None
+    start_time: Optional[datetime] = None
+    end_time: Optional[datetime] = None
+    is_mandatory: Optional[bool] = None
+    shuffle_questions: Optional[bool] = None

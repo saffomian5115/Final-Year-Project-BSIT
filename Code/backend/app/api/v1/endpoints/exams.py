@@ -3,9 +3,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.dependencies import get_current_user, require_teacher, require_admin
 from app.services.assessment_service import ExamService
-from app.schemas.assessment import (
-    ExamCreateRequest, BulkExamResultRequest
-)
+from app.schemas.assessment import ExamCreateRequest, BulkExamResultRequest, ExamUpdateRequest
 from app.utils.response import success_response, error_response
 
 router = APIRouter(tags=["Exams"])
@@ -58,6 +56,36 @@ def get_exams(
         "offering_id": offering_id,
         "exams": data
     }, "Exams retrieved")
+
+@router.put("/exams/{exam_id}")
+def update_exam(
+    exam_id: int,
+    request: ExamUpdateRequest,
+    db: Session = Depends(get_db),
+    current_user = Depends(require_teacher)
+):
+    exam = ExamService.get_by_id(db, exam_id)
+    if not exam:
+        return error_response("Exam not found", "NOT_FOUND", status_code=404)
+
+    update_data = request.model_dump(exclude_none=True)
+    for key, value in update_data.items():
+        setattr(exam, key, value)
+
+    db.commit()
+    db.refresh(exam)
+
+    return success_response({
+        "id": exam.id,
+        "exam_type": exam.exam_type,
+        "title": exam.title,
+        "total_marks": exam.total_marks,
+        "weightage_percent": float(exam.weightage_percent),
+        "exam_date": str(exam.exam_date) if exam.exam_date else None,
+        "start_time": exam.start_time,
+        "end_time": exam.end_time,
+        "room_number": exam.room_number
+    }, "Exam updated successfully")
 
 
 @router.post("/exams/{exam_id}/results")

@@ -110,3 +110,6 @@ class TeacherUpdateRequest(BaseModel):
     specialization: Optional[str] = None
     phone: Optional[str] = None
     address: Optional[str] = None
+
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str

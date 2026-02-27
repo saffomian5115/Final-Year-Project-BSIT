@@ -3,10 +3,8 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.dependencies import get_current_user, require_teacher
 from app.services.assessment_service import QuizService, AIQuizService
-from app.schemas.assessment import (
-    QuizCreateRequest, QuizAttemptSubmitRequest,
-    AIQuizGenerateRequest, AIQuizSubmitRequest
-)
+from app.schemas.assessment import QuizCreateRequest, QuizAttemptSubmitRequest, \
+    AIQuizGenerateRequest, AIQuizSubmitRequest, QuizUpdateRequest
 from app.utils.response import success_response, error_response
 
 router = APIRouter(tags=["Quizzes"])
@@ -108,6 +106,47 @@ def get_quiz(
         "shuffle_questions": quiz.shuffle_questions,
         "questions": questions_data
     })
+
+@router.put("/quizzes/{quiz_id}")
+def update_quiz(
+    quiz_id: int,
+    request: QuizUpdateRequest,
+    db: Session = Depends(get_db),
+    current_user = Depends(require_teacher)
+):
+    quiz = QuizService.get_by_id(db, quiz_id)
+    if not quiz:
+        return error_response("Quiz not found", "NOT_FOUND", status_code=404)
+
+    # Only creator or admin can update
+    if current_user.role != "admin" and quiz.created_by != current_user.id:
+        return error_response("Not authorized to update this quiz", "FORBIDDEN", status_code=403)
+
+    # Cannot update if attempts already exist
+    if quiz.attempts:
+        return error_response(
+            "Cannot edit quiz — students have already attempted it",
+            "EDIT_NOT_ALLOWED",
+            status_code=400
+        )
+
+    update_data = request.model_dump(exclude_none=True)
+    for key, value in update_data.items():
+        setattr(quiz, key, value)
+
+    db.commit()
+    db.refresh(quiz)
+
+    return success_response({
+        "id": quiz.id,
+        "title": quiz.title,
+        "description": quiz.description,
+        "total_marks": quiz.total_marks,
+        "time_limit_minutes": quiz.time_limit_minutes,
+        "start_time": str(quiz.start_time) if quiz.start_time else None,
+        "end_time": str(quiz.end_time) if quiz.end_time else None,
+        "is_mandatory": quiz.is_mandatory
+    }, "Quiz updated successfully")
 
 
 @router.post("/quizzes/{quiz_id}/attempt")
