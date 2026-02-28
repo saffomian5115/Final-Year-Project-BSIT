@@ -8,8 +8,7 @@ export const adminAPI = {
   getStudent: (id) => api.get(`/students/${id}`),
   createStudent: (data) => api.post('/students', data),
   updateStudent: (id, data) => api.put(`/students/${id}`, data),
-  toggleStudentStatus: (id) => api.patch(`/students/${id}/status`),  // FIX: no body needed
-
+toggleStudentStatus: (id) => api.patch(`/students/${id}/status`),
   // ─── TEACHERS ──────────────────────────────────────────
   getTeachers: (page = 1, per_page = 20, search = '') =>
     api.get(`/teachers?page=${page}&per_page=${per_page}${search ? `&search=${encodeURIComponent(search)}` : ''}`),

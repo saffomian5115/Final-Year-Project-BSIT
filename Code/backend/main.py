@@ -1,9 +1,10 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from fastapi.openapi.utils import get_openapi
+from fastapi.staticfiles import StaticFiles
 from app.api.v1.router import api_router
 from app.core.config import settings
+import os
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -20,6 +21,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Static files (profile pictures)
+os.makedirs("uploads/avatars", exist_ok=True)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 # Global exception handler
 @app.exception_handler(Exception)

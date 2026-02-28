@@ -31,7 +31,6 @@ ENV/
 virtualenv/
 
 # IDE
-.vscode/
 .idea/
 *.swp
 *.swo

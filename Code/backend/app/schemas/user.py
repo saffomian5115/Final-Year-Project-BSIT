@@ -36,13 +36,50 @@ class ChangePasswordRequest(BaseModel):
             raise ValueError("Password must be at least 8 characters")
         return v
 
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str
+
+# ─── PROFILE SCHEMAS ────────────────────────────────────
+class ProfileResponse(BaseModel):
+    user_id: int
+    email: str
+    role: str
+    is_active: bool
+    full_name: str
+    phone: Optional[str] = None
+    profile_picture_url: Optional[str] = None
+    roll_number: Optional[str] = None
+    father_name: Optional[str] = None
+    date_of_birth: Optional[date] = None
+    gender: Optional[str] = None
+    cnic: Optional[str] = None
+    city: Optional[str] = None
+    current_address: Optional[str] = None
+    guardian_phone: Optional[str] = None
+    employee_id: Optional[str] = None
+    designation: Optional[str] = None
+    qualification: Optional[str] = None
+    specialization: Optional[str] = None
+    joining_date: Optional[date] = None
+    last_login: Optional[datetime] = None
+    created_at: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True
+
+class UpdateProfileRequest(BaseModel):
+    full_name: Optional[str] = None
+    phone: Optional[str] = None
+    city: Optional[str] = None
+    current_address: Optional[str] = None
+    designation: Optional[str] = None
+    qualification: Optional[str] = None
+    specialization: Optional[str] = None
+
 # ─── STUDENT SCHEMAS ────────────────────────────────────
 class StudentCreateRequest(BaseModel):
-    # User fields
     email: EmailStr
-    roll_number: str
-
-    # Profile fields
+    roll_number: Optional[str] = None   # ← Optional — auto generate hoga
     full_name: str
     father_name: Optional[str] = None
     date_of_birth: Optional[date] = None
@@ -61,8 +98,10 @@ class StudentUpdateRequest(BaseModel):
     father_name: Optional[str] = None
     phone: Optional[str] = None
     current_address: Optional[str] = None
+    permanent_address: Optional[str] = None
     city: Optional[str] = None
     guardian_phone: Optional[str] = None
+    gender: Optional[str] = None
 
 class StudentResponse(BaseModel):
     user_id: int
@@ -101,15 +140,13 @@ class TeacherResponse(BaseModel):
     phone: Optional[str]
     is_active: bool
 
-class Config:
-    from_attributes = True
+    class Config:
+        from_attributes = True
 
 class TeacherUpdateRequest(BaseModel):
+    full_name: Optional[str] = None
     designation: Optional[str] = None
     qualification: Optional[str] = None
     specialization: Optional[str] = None
     phone: Optional[str] = None
     address: Optional[str] = None
-
-class RefreshTokenRequest(BaseModel):
-    refresh_token: str

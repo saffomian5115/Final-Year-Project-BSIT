@@ -12,6 +12,14 @@ export const authStore = {
     return u ? JSON.parse(u) : null
   },
 
+  updateUser: (updatedFields) => {
+    const existing = authStore.getUser()
+    if (existing) {
+      const merged = { ...existing, ...updatedFields }
+      localStorage.setItem('user', JSON.stringify(merged))
+    }
+  },
+
   clear: () => {
     localStorage.removeItem('access_token')
     localStorage.removeItem('refresh_token')

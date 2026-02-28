@@ -79,6 +79,7 @@ CREATE TABLE admin_profiles (
     designation VARCHAR(100),
     phone VARCHAR(20),
     email_official VARCHAR(100),
+    profile_picture_url TEXT NULL,
     role_type ENUM('admin', 'security_admin', 'gate_operator') DEFAULT 'admin',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE

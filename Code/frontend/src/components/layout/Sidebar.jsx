@@ -1,13 +1,12 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { authStore } from '../../store/authStore'
 import {
-  LayoutDashboard, BookOpen, ClipboardList, FileText,
+  LayoutDashboard, BookOpen, FileText,
   BarChart2, CreditCard, Bell, MessageSquare, Users,
-  GraduationCap, Settings, LogOut, Building2, Calendar,
+  GraduationCap, Settings, Building2, Calendar,
   ClipboardCheck, PenSquare, BrainCircuit, ChevronRight
 } from 'lucide-react'
 
-// Role wise menus
 const MENUS = {
   student: [
     { label: 'Dashboard',    icon: LayoutDashboard,  to: '/student/dashboard' },
@@ -50,17 +49,17 @@ const ROLE_CONFIG = {
   student: { label: 'Student',       color: 'bg-blue-500',   text: 'S' },
 }
 
+const BASE_URL = 'http://127.0.0.1:8000'
+
 export default function Sidebar({ isOpen }) {
-  const navigate = useNavigate()
   const user = authStore.getUser()
   const role = user?.role || 'student'
   const menus = MENUS[role] || []
   const rc = ROLE_CONFIG[role]
 
-  const handleLogout = () => {
-    authStore.clear()
-    navigate('/login')
-  }
+  const avatarUrl = user?.profile_picture_url
+    ? `${BASE_URL}${user.profile_picture_url}`
+    : null
 
   return (
     <aside className={`
@@ -83,9 +82,17 @@ export default function Sidebar({ isOpen }) {
       {/* User info */}
       <div className="px-4 py-4 border-b border-slate-700/50">
         <div className="flex items-center gap-3 bg-slate-800 rounded-xl p-3">
-          <div className={`w-9 h-9 ${rc.color} rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
-            {user?.full_name?.[0] || rc.text}
-          </div>
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt="avatar"
+              className="w-9 h-9 rounded-lg object-cover flex-shrink-0"
+            />
+          ) : (
+            <div className={`w-9 h-9 ${rc.color} rounded-lg flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
+              {user?.full_name?.[0]?.toUpperCase() || rc.text}
+            </div>
+          )}
           <div className="overflow-hidden">
             <p className="text-white text-sm font-semibold truncate">{user?.full_name || 'User'}</p>
             <p className="text-slate-400 text-xs">{rc.label}</p>
@@ -113,17 +120,6 @@ export default function Sidebar({ isOpen }) {
           </NavLink>
         ))}
       </nav>
-
-      {/* Logout */}
-      <div className="px-3 py-4 border-t border-slate-700/50">
-        <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition-all duration-150"
-        >
-          <LogOut size={18} />
-          <span>Logout</span>
-        </button>
-      </div>
     </aside>
   )
 }

@@ -23,14 +23,27 @@ export default function LoginPage() {
 
       // Check if login successful
       if (res.data.success) {
-        const { access_token, refresh_token, role, user_id, full_name } =
-          res.data.data;
-        const user = { id: user_id, role, full_name, email: form.email };
+        const {
+          access_token,
+          refresh_token,
+          role,
+          user_id,
+          full_name,
+          profile_picture_url,
+        } = res.data.data;
+
+        // profile_picture_url bhi store karo
+        const user = {
+          id: user_id,
+          role,
+          full_name,
+          email: form.email,
+          profile_picture_url,
+        };
 
         authStore.setAuth(access_token, refresh_token, user);
         toast.success(`Welcome, ${full_name}!`);
 
-        // Role based redirect
         if (role === "admin") navigate("/admin/dashboard");
         else if (role === "teacher") navigate("/teacher/dashboard");
         else navigate("/student/dashboard");

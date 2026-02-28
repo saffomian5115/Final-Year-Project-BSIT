@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import LoginPage from "./pages/auth/LoginPage";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import { authStore } from "./store/authStore";
+import ProfilePage from './pages/shared/ProfilePage'
 
 // ── Phase 1: Admin Pages ────────────────────────────
 import AdminDashboard    from './pages/admin/AdminDashboard'
@@ -107,6 +108,7 @@ export default function App() {
               <DashboardLayout>
                 <Routes>
                   <Route path="dashboard"     element={<AdminDashboard />} />
+                  <Route path="profile" element={<ProfilePage />} />
                   <Route path="students"      element={<StudentsPage />} />
                   <Route path="teachers" element={<TeachersPage />} />
                   <Route path="departments" element={<DepartmentsPage />} />
@@ -141,6 +143,7 @@ export default function App() {
               <DashboardLayout>
                 <Routes>
                   <Route path="dashboard" element={<TeacherDashboard />} />
+                  <Route path="profile" element={<ProfilePage />} />
                   <Route path="courses" element={<MyCoursesPage />} />
                   <Route path="attendance" element={<AttendancePage />} />
                   <Route path="assignments" element={<AssignmentsPage />} />
@@ -171,6 +174,7 @@ export default function App() {
               <DashboardLayout>
                 <Routes>
                   <Route path="dashboard" element={<StudentDashboard />} />
+                  <Route path="profile" element={<ProfilePage />} />
                   <Route path="courses" element={<StudentCourses />} />
                   <Route path="attendance" element={<StudentAttendance />} />
                   <Route path="assignments" element={<StudentAssignments />} />
