@@ -42,10 +42,13 @@ def get_courses(
         "credit_hours": c.credit_hours,
         "lecture_hours": c.lecture_hours,
         "lab_hours": c.lab_hours,
+        "department_id": c.department_id,
         "department_name": c.department.name if c.department else None,
+        "program_id": c.program_id,
         "program_name": c.program.name if c.program else None,
         "semester_level": c.semester_level,
-        "is_elective": c.is_elective
+        "is_elective": c.is_elective,
+        "description": c.description,
     } for c in courses]
 
     return success_response({"courses": data}, "Courses retrieved")

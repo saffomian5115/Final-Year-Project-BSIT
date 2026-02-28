@@ -180,9 +180,9 @@ function CourseModal({ course, departments, programs, onClose, onSuccess }) {
     credit_hours:   course?.credit_hours   || 3,
     lecture_hours:  course?.lecture_hours  || 2,
     lab_hours:      course?.lab_hours      || 0,
-    department_id:  course?.department_id  || '',
-    program_id:     course?.program_id     || '',
-    semester_level: course?.semester_level || '',
+    department_id:  course?.department_id  ? Number(course.department_id)  : '',
+    program_id:     course?.program_id     ? Number(course.program_id)     : '',
+    semester_level: course?.semester_level ? Number(course.semester_level) : '',
     description:    course?.description    || '',
     is_elective:    course?.is_elective    || false,
   })
