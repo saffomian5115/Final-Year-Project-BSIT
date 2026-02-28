@@ -55,22 +55,20 @@ def get_fee_structures(
     structures = FeeStructureService.get_all(db, program_id)
     data = [{
         "id": s.id,
+        "program_id": s.program_id,
         "program_name": s.program.name if s.program else None,
         "semester_number": s.semester_number,
         "tuition_fee": float(s.tuition_fee),
         "admission_fee": float(s.admission_fee or 0),
         "library_fee": float(s.library_fee or 0),
         "sports_fee": float(s.sports_fee or 0),
+        "other_fees": s.other_fees or [],
         "total_fee": FeeStructureService.calculate_total(s),
         "valid_from": str(s.valid_from),
         "valid_to": str(s.valid_to) if s.valid_to else None
     } for s in structures]
 
-    return success_response(
-        {"fee_structures": data, "total": len(data)},
-        "Fee structures retrieved"
-    )
-
+    return success_response({"structures": data, "total": len(data)}, "Fee structures retrieved")
 
 @router.get("/fee-structure/{structure_id}")
 def get_fee_structure(
@@ -353,37 +351,12 @@ def record_payment(
     voucher_id: int,
     request: PaymentCreateRequest,
     db: Session = Depends(get_db),
-    current_user = Depends(require_admin)
+    admin = Depends(require_admin)
 ):
-    payment, error = PaymentService.record_payment(
-        db, voucher_id, request.model_dump(), received_by=current_user.id
-    )
+    payment, error = PaymentService.record(db, voucher_id, request.model_dump())
     if error:
         return error_response(error, "PAYMENT_FAILED")
-
-    # Updated voucher info
-    voucher = VoucherService.get_by_id(db, voucher_id)
-    total_paid = sum(
-        float(p.amount_paid)
-        for p in PaymentService.get_voucher_payments(db, voucher_id)
-    )
-
-    return success_response({
-        "payment_id": payment.id,
-        "voucher_id": voucher_id,
-        "voucher_number": voucher.voucher_number if voucher else None,
-        "amount_paid": float(payment.amount_paid),
-        "payment_method": payment.payment_method,
-        "receipt_number": payment.receipt_number,
-        "payment_date": str(payment.payment_date),
-        "voucher_status": voucher.status if voucher else None,
-        "total_paid_so_far": total_paid,
-        "remaining_balance": round(
-            float(voucher.amount) +
-            float(voucher.fine_amount or 0) - total_paid, 2
-        ) if voucher else 0
-    }, "Payment recorded successfully", status_code=201)
-
+    return success_response({"payment_id": payment.id}, "Payment recorded successfully")
 
 @router.get("/students/{student_id}/payment-history")
 def get_payment_history(
