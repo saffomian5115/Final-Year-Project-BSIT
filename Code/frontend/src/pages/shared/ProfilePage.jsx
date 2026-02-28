@@ -25,6 +25,31 @@ function InfoRow({ icon: Icon, label, value }) {
   )
 }
 
+// ── Password Field Component (Bahar nikal diya) ─────
+function PwdField({ label, fieldKey, showKey, form, set, show, toggleShow, inputCls }) {
+  return (
+    <div>
+      <label className="block text-xs font-medium text-slate-500 mb-1.5">{label}</label>
+      <div className="relative">
+        <input
+          type={show[showKey] ? 'text' : 'password'}
+          value={form[fieldKey]}
+          onChange={e => set(fieldKey, e.target.value)}
+          className={inputCls}
+          placeholder="••••••••"
+        />
+        <button
+          type="button"
+          onClick={() => toggleShow(showKey)}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+        >
+          {show[showKey] ? <EyeOff size={15} /> : <Eye size={15} />}
+        </button>
+      </div>
+    </div>
+  )
+}
+
 // ── Change Password Modal ──────────────────────────
 function ChangePasswordModal({ onClose }) {
   const [form, setForm] = useState({ current_password: '', new_password: '', confirm_password: '' })
@@ -65,28 +90,6 @@ function ChangePasswordModal({ onClose }) {
 
   const inputCls = "w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-10"
 
-  const PwdField = ({ label, fieldKey, showKey }) => (
-    <div>
-      <label className="block text-xs font-medium text-slate-500 mb-1.5">{label}</label>
-      <div className="relative">
-        <input
-          type={show[showKey] ? 'text' : 'password'}
-          value={form[fieldKey]}
-          onChange={e => set(fieldKey, e.target.value)}
-          className={inputCls}
-          placeholder="••••••••"
-        />
-        <button
-          type="button"
-          onClick={() => toggleShow(showKey)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-        >
-          {show[showKey] ? <EyeOff size={15} /> : <Eye size={15} />}
-        </button>
-      </div>
-    </div>
-  )
-
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl w-full max-w-sm shadow-2xl">
@@ -103,9 +106,36 @@ function ChangePasswordModal({ onClose }) {
         </div>
 
         <div className="p-6 space-y-4">
-          <PwdField label="Current Password" fieldKey="current_password" showKey="current" />
-          <PwdField label="New Password" fieldKey="new_password" showKey="new" />
-          <PwdField label="Confirm New Password" fieldKey="confirm_password" showKey="confirm" />
+          <PwdField 
+            label="Current Password" 
+            fieldKey="current_password" 
+            showKey="current"
+            form={form}
+            set={set}
+            show={show}
+            toggleShow={toggleShow}
+            inputCls={inputCls}
+          />
+          <PwdField 
+            label="New Password" 
+            fieldKey="new_password" 
+            showKey="new"
+            form={form}
+            set={set}
+            show={show}
+            toggleShow={toggleShow}
+            inputCls={inputCls}
+          />
+          <PwdField 
+            label="Confirm New Password" 
+            fieldKey="confirm_password" 
+            showKey="confirm"
+            form={form}
+            set={set}
+            show={show}
+            toggleShow={toggleShow}
+            inputCls={inputCls}
+          />
 
           <p className="text-xs text-slate-400">Password kam az kam 8 characters ka hona chahiye.</p>
         </div>

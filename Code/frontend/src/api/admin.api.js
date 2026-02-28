@@ -30,6 +30,7 @@ toggleStudentStatus: (id) => api.patch(`/students/${id}/status`),
   createProgram: (data) => api.post('/programs', data),
   updateProgram: (id, data) => api.put(`/programs/${id}`, data),
   deleteProgram: (id) => api.delete(`/programs/${id}`),
+  activateSemester: (id) => api.patch(`/semesters/${id}/activate`),
 
   // ─── SEMESTERS ─────────────────────────────────────────
   getSemesters: () => api.get('/semesters'),
