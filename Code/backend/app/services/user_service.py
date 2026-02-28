@@ -117,6 +117,7 @@ class UserService:
         db.commit()
         return user, None
 
+
     @staticmethod
     def toggle_student_status(db: Session, student_id: int):
         user = db.query(User).filter(
@@ -162,10 +163,22 @@ class UserService:
         return {"user": user, "temp_password": temp_password}, None
 
     @staticmethod
-    def get_teachers(db: Session, page: int = 1, per_page: int = 20):
+    def get_teachers(db: Session, page: int = 1, per_page: int = 20, search: str = ""):
         offset = (page - 1) * per_page
-        total = db.query(func.count(User.id)).filter(User.role == "teacher").scalar()
-        teachers = db.query(User).filter(User.role == "teacher").offset(offset).limit(per_page).all()
+        query = db.query(User).filter(User.role == "teacher")
+
+        if search:
+            search_term = f"%{search}%"
+            query = query.join(User.teacher_profile).filter(
+                (User.email.ilike(search_term)) |
+                (TeacherProfile.full_name.ilike(search_term)) |
+                (TeacherProfile.employee_id.ilike(search_term)) |
+                (TeacherProfile.designation.ilike(search_term)) |
+                (TeacherProfile.phone.ilike(search_term))
+            )
+
+        total = query.count()
+        teachers = query.offset(offset).limit(per_page).all()
         return teachers, total
 
     @staticmethod

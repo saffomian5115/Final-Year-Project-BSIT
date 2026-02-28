@@ -43,7 +43,6 @@ virtualenv/
 *.sqlite
 
 # Environment variables
-.env
 .env.local
 .env.development
 .env.production
