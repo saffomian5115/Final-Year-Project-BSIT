@@ -66,7 +66,7 @@ function SubmitModal({ assignment, onClose, onSuccess }) {
                   <p className="text-xs text-slate-400 mt-1">PDF, DOC, ZIP supported</p>
                 </>
               )}
-              <input id="file-input" type="file" className="hidden" onChange={e => setFile(e.target.files[0])} />
+              <input id="file-input" type="file" className="hidden" accept="image/*, .pdf, .docx, .zip" onChange={e => setFile(e.target.files[0])} />
             </div>
           </div>
           <div>

@@ -18,6 +18,12 @@ export const studentAPI = {
     return api.get(`/students/me/enrollments${params}`)
   },
 
+  getOffering: (offeringId) =>
+    api.get(`/offerings/${offeringId}`),
+
+  getCourseCLOs: (courseId) =>
+    api.get(`/courses/${courseId}/clos`),
+
   // ── Attendance ───────────────────────────────────
   /** GET /students/:id/attendance?offering_id=X */
   getAttendance: (studentId, offeringId) =>

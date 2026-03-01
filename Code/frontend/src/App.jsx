@@ -35,6 +35,7 @@ import ChatPage from "./pages/teacher/ChatPage";
 // Phase 3: Student Pages
 import StudentDashboard from "./pages/student/StudentDashboard";
 import StudentCourses from "./pages/student/MyCoursesPage";
+import CourseDetailsPage from "./pages/student/CourseDetailsPage";
 import StudentAttendance from "./pages/student/AttendancePage";
 import StudentAssignments from "./pages/student/AssignmentsPage";
 import StudentQuizzes from "./pages/student/QuizzesPage";
@@ -176,6 +177,7 @@ export default function App() {
                   <Route path="dashboard" element={<StudentDashboard />} />
                   <Route path="profile" element={<ProfilePage />} />
                   <Route path="courses" element={<StudentCourses />} />
+                  <Route path="courses/:offeringId" element={<CourseDetailsPage />} />
                   <Route path="attendance" element={<StudentAttendance />} />
                   <Route path="assignments" element={<StudentAssignments />} />
                   <Route path="quizzes" element={<StudentQuizzes />} />

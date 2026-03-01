@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, UploadFile, File, Form
+import os
+import shutil
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.dependencies import get_current_user, require_teacher
@@ -104,12 +106,25 @@ def update_assignment(
 @router.post("/assignments/{assignment_id}/submit")
 def submit_assignment(
     assignment_id: int,
-    request: AssignmentSubmitRequest,
+    file: UploadFile = File(...),
+    notes: str = Form(None),
     db: Session = Depends(get_db),
     current_user = Depends(get_current_user)
 ):
+    upload_dir = f"uploads/assignments"
+    os.makedirs(upload_dir, exist_ok=True)
+    file_path = f"{upload_dir}/student_{current_user.id}_assign_{assignment_id}_{file.filename}"
+    
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+        
+    data = {
+        "file_path": file_path,
+        "remarks": notes
+    }
+    
     submission, error = AssignmentService.submit(
-        db, assignment_id, current_user.id, request.model_dump()
+        db, assignment_id, current_user.id, data
     )
     if error:
         return error_response(error, "SUBMIT_FAILED")

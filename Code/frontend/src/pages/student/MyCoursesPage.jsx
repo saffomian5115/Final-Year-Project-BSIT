@@ -78,7 +78,11 @@ export default function MyCoursesPage() {
                     <p className="text-slate-400">{e.instructor}</p>
                   )}
                 </div>
-                <div className="mt-4 grid grid-cols-2 gap-2">
+                <div className="mt-4 grid grid-cols-3 gap-2">
+                  <button onClick={() => navigate(`/student/courses/${e.offering_id}`)}
+                    className="py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-xl transition-colors">
+                    Details
+                  </button>
                   <button onClick={() => navigate(`/student/attendance`)}
                     className="py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-xl transition-colors">
                     Attendance
