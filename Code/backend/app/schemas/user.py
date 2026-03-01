@@ -39,6 +39,15 @@ class ChangePasswordRequest(BaseModel):
 class RefreshTokenRequest(BaseModel):
     refresh_token: str
 
+# ─── FACE AUTH SCHEMAS ──────────────────────────────────
+class FaceLoginRequest(BaseModel):
+    """Frontend MediaPipe se cropped face ka base64 bhejta hai"""
+    image_base64: str   # data:image/jpeg;base64,... ya sirf raw base64
+
+class FaceEnrollRequest(BaseModel):
+    """Profile page se face enroll karne ke liye"""
+    image_base64: str
+
 # ─── PROFILE SCHEMAS ────────────────────────────────────
 class ProfileResponse(BaseModel):
     user_id: int
@@ -63,6 +72,7 @@ class ProfileResponse(BaseModel):
     joining_date: Optional[date] = None
     last_login: Optional[datetime] = None
     created_at: Optional[datetime] = None
+    face_enrolled: Optional[bool] = False   # ← NEW
 
     class Config:
         from_attributes = True
@@ -79,7 +89,7 @@ class UpdateProfileRequest(BaseModel):
 # ─── STUDENT SCHEMAS ────────────────────────────────────
 class StudentCreateRequest(BaseModel):
     email: EmailStr
-    roll_number: Optional[str] = None   # ← Optional — auto generate hoga
+    roll_number: Optional[str] = None
     full_name: str
     father_name: Optional[str] = None
     date_of_birth: Optional[date] = None
@@ -97,31 +107,20 @@ class StudentUpdateRequest(BaseModel):
     full_name: Optional[str] = None
     father_name: Optional[str] = None
     phone: Optional[str] = None
+    date_of_birth: Optional[date] = None
+    gender: Optional[GenderEnum] = None
+    cnic: Optional[str] = None
     current_address: Optional[str] = None
     permanent_address: Optional[str] = None
     city: Optional[str] = None
     guardian_phone: Optional[str] = None
-    gender: Optional[str] = None
-
-class StudentResponse(BaseModel):
-    user_id: int
-    roll_number: Optional[str]
-    email: str
-    full_name: str
-    father_name: Optional[str]
-    gender: Optional[str]
-    phone: Optional[str]
-    city: Optional[str]
-    is_active: bool
-    created_at: datetime
-
-    class Config:
-        from_attributes = True
+    guardian_cnic: Optional[str] = None
+    guardian_relation: Optional[str] = None
 
 # ─── TEACHER SCHEMAS ────────────────────────────────────
 class TeacherCreateRequest(BaseModel):
     email: EmailStr
-    employee_id: str
+    employee_id: Optional[str] = None
     full_name: str
     designation: Optional[str] = None
     qualification: Optional[str] = None
@@ -130,18 +129,6 @@ class TeacherCreateRequest(BaseModel):
     phone: Optional[str] = None
     cnic: Optional[str] = None
     address: Optional[str] = None
-
-class TeacherResponse(BaseModel):
-    user_id: int
-    employee_id: Optional[str]
-    full_name: str
-    designation: Optional[str]
-    specialization: Optional[str]
-    phone: Optional[str]
-    is_active: bool
-
-    class Config:
-        from_attributes = True
 
 class TeacherUpdateRequest(BaseModel):
     full_name: Optional[str] = None

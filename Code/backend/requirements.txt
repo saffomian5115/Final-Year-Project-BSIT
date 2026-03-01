@@ -27,3 +27,6 @@ joblib==1.5.3
 
 matplotlib==3.8.4
 pillow==10.4.0
+
+dlib==20.0.0
+dlib-bin==20.0.0
