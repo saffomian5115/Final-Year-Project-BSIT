@@ -260,6 +260,12 @@ class QuizService:
             QuizAttempt.student_id == student_id
         ).first()
 
+    @staticmethod
+    def get_quiz_attempts(db: Session, quiz_id: int):
+        return db.query(QuizAttempt).filter(
+            QuizAttempt.quiz_id == quiz_id
+        ).order_by(QuizAttempt.score.desc()).all()
+
 
 class AIQuizService:
 

@@ -127,6 +127,7 @@ function CreateQuizModal({ offerings, onClose, onSuccess }) {
     try {
       await teacherAPI.createQuiz(form.offering_id, {
         title: form.title, description: form.description,
+        total_marks: totalMarks,
         time_limit_minutes: form.time_limit_minutes,
         start_time: form.start_time || null, end_time: form.end_time || null,
         is_mandatory: form.is_mandatory, shuffle_questions: form.shuffle_questions,
@@ -252,7 +253,7 @@ function ResultsModal({ quizId, quizTitle, totalMarks, onClose }) {
 
   useEffect(() => {
     teacherAPI.getQuizAttempts(quizId)
-      .then(r => setResults(r.data.data?.results || []))
+      .then(r => setResults(r.data.data?.attempts || []))
       .catch(() => toast.error('Failed to load results'))
       .finally(() => setLoading(false))
   }, [quizId])
@@ -295,10 +296,10 @@ function ResultsModal({ quizId, quizTitle, totalMarks, onClose }) {
               {results.length === 0 ? (
                 <p className="text-center py-8 text-slate-400">No attempts yet</p>
               ) : results.map(r => (
-                <div key={r.student_id} className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl">
-                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-700 text-xs font-bold">{r.full_name?.[0] || '?'}</div>
+                <div key={r.id} className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-xl">
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-700 text-xs font-bold">{r.student_name?.[0] || '?'}</div>
                   <div className="flex-1">
-                    <p className="font-medium text-slate-700 text-sm">{r.full_name}</p>
+                    <p className="font-medium text-slate-700 text-sm">{r.student_name}</p>
                     <p className="text-xs text-slate-400 font-mono">{r.roll_number}</p>
                   </div>
                   <div className="text-right">

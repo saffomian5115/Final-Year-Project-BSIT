@@ -27,13 +27,23 @@ function CreateAssignmentModal({ offeringId, onClose, onSuccess }) {
   const set = (k, v) => setForm(p => ({ ...p, [k]: v }))
 
   const handleSubmit = async () => {
-    if (!form.title || !form.due_date) { toast.error('Title and due date required'); return }
+    // Basic validation
+    if (!form.title.trim()) { toast.error('Title is required'); return }
+    if (!form.due_date) { toast.error('Due date is required'); return }
     setLoading(true)
     try {
-      await teacherAPI.createAssignment(offeringId, form)
+      const submissionData = {
+        ...form,
+        offering_id: parseInt(offeringId),
+        total_marks: parseInt(form.total_marks)
+      }
+      await teacherAPI.createAssignment(offeringId, submissionData)
       toast.success('Assignment created successfully')
       onSuccess(); onClose()
-    } catch (err) { toast.error(err.response?.data?.message || 'Failed') }
+    } catch (err) { 
+      console.error("Assignment create error:", err)
+      toast.error(err.response?.data?.message || 'Failed to create assignment') 
+    }
     finally { setLoading(false) }
   }
 

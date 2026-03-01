@@ -29,7 +29,7 @@ class SubmissionStatusEnum(str, Enum):
 # ─── ASSIGNMENT SCHEMAS ─────────────────────────────────
 
 class AssignmentCreateRequest(BaseModel):
-    offering_id: int
+    offering_id: Optional[int] = None
     title: str
     description: Optional[str] = None
     total_marks: int
@@ -75,7 +75,7 @@ class QuizQuestionCreateRequest(BaseModel):
     explanation: Optional[str] = None
 
 class QuizCreateRequest(BaseModel):
-    offering_id: int
+    offering_id: Optional[int] = None
     title: str
     description: Optional[str] = None
     total_marks: int

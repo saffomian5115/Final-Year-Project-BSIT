@@ -219,6 +219,42 @@ def get_messages(
     }, "Messages retrieved")
 
 
+@router.post("/chat/groups/{group_id}/messages")
+def send_message(
+    group_id: int,
+    message_text: str = None, # From form field if any
+    data: dict = None,        # From JSON body
+    db: Session = Depends(get_db),
+    current_user = Depends(get_current_user)
+):
+    # Member check
+    if not ChatService.is_member(db, group_id, current_user.id):
+        return error_response("Access denied", "FORBIDDEN", status_code=403)
+
+    # Resolve message text
+    msg_txt = message_text or (data.get("message") if data else None)
+    if not msg_txt:
+        return error_response("Message content required", "VALIDATION_ERROR")
+
+    # Save message
+    message = MessageService.save_message(
+        db=db,
+        group_id=group_id,
+        sender_id=current_user.id,
+        message=msg_txt,
+        message_type=data.get("message_type", "text") if data else "text",
+        attachment_url=data.get("attachment_url") if data else None
+    )
+
+    return success_response({
+        "id": message.id,
+        "group_id": group_id,
+        "sender_id": current_user.id,
+        "message": message.message,
+        "sent_at": str(message.sent_at)
+    }, "Message sent successfully", status_code=201)
+
+
 @router.delete("/chat/messages/{message_id}")
 def delete_message(
     message_id: int,
