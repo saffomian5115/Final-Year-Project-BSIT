@@ -42,8 +42,8 @@ def create_session(
         "id": session.id,
         "offering_id": session.offering_id,
         "session_date": str(session.session_date),
-        "start_time": session.start_time,
-        "end_time": session.end_time,
+        "start_time": str(session.start_time),
+        "end_time": str(session.end_time),
         "topic": session.topic,
         "session_type": session.session_type
     }, "Session created successfully", status_code=201)
@@ -59,8 +59,8 @@ def get_sessions(
     data = [{
         "id": s.id,
         "session_date": str(s.session_date),
-        "start_time": s.start_time,
-        "end_time": s.end_time,
+        "start_time": str(s.start_time),
+        "end_time": str(s.end_time),
         "topic": s.topic,
         "session_type": s.session_type,
         "is_makeup": s.is_makeup,

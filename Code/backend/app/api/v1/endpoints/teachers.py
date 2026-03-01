@@ -1,12 +1,76 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.core.database import get_db
-from app.core.dependencies import require_admin, get_current_user
+from app.core.dependencies import require_admin, get_current_user, require_teacher
 from app.services.user_service import UserService
-from app.schemas.user import TeacherCreateRequest, TeacherUpdateRequest
+from app.services.enrollment_service import OfferingService
+from app.schemas.user import TeacherCreateRequest, TeacherUpdateRequest, UpdateProfileRequest
 from app.utils.response import success_response, error_response
+from app.models.user import User
 
 router = APIRouter(prefix="/teachers", tags=["Teachers"])
+
+@router.get("/me")
+def get_teacher_me(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_teacher)
+):
+    teacher = UserService.get_teacher_by_id(db, current_user.id)
+    if not teacher:
+        return error_response("Teacher profile not found", "NOT_FOUND", status_code=404)
+
+    p = teacher.teacher_profile
+    return success_response({
+        "user_id": teacher.id,
+        "email": teacher.email,
+        "is_active": teacher.is_active,
+        "employee_id": p.employee_id if p else None,
+        "full_name": p.full_name if p else None,
+        "designation": p.designation if p else None,
+        "qualification": p.qualification if p else None,
+        "specialization": p.specialization if p else None,
+        "joining_date": str(p.joining_date) if p and p.joining_date else None,
+        "phone": p.phone if p else None,
+        "cnic": p.cnic if p else None,
+        "address": p.address if p else None,
+    }, "Profile retrieved")
+
+
+@router.put("/me")
+def update_teacher_me(
+    request: UpdateProfileRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_teacher)
+):
+    teacher, error = UserService.update_teacher(
+        db, current_user.id, request.model_dump(exclude_none=True)
+    )
+    if error:
+        return error_response(error, "UPDATE_FAILED", status_code=404)
+    return success_response(message="Profile updated successfully")
+
+
+@router.get("/me/offerings")
+def get_teacher_offerings(
+    semester_id: int = None,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_teacher)
+):
+    offerings = OfferingService.get_all(db, semester_id=semester_id, instructor_id=current_user.id)
+    data = [{
+        "id": o.id,
+        "course_code": o.course.code if o.course else None,
+        "course_name": o.course.name if o.course else None,
+        "section": o.section,
+        "semester_name": o.semester.name if o.semester else None,
+        "enrolled_students": o.enrolled_students,
+        "max_students": o.max_students,
+        "room_number": o.room_number,
+        "is_active": o.is_active,
+        "schedule": o.schedule_json
+    } for o in offerings]
+
+    return success_response({"offerings": data}, "Offerings retrieved")
 
 
 @router.post("")

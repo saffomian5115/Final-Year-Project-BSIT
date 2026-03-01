@@ -47,7 +47,7 @@ def get_exams(
         "total_marks": e.total_marks,
         "weightage_percent": float(e.weightage_percent),
         "exam_date": str(e.exam_date) if e.exam_date else None,
-        "start_time": e.start_time,
+        "start_time": str(e.start_time) if e.start_time else None,
         "room_number": e.room_number,
         "total_results": len(e.results)
     } for e in exams]
@@ -82,8 +82,8 @@ def update_exam(
         "total_marks": exam.total_marks,
         "weightage_percent": float(exam.weightage_percent),
         "exam_date": str(exam.exam_date) if exam.exam_date else None,
-        "start_time": exam.start_time,
-        "end_time": exam.end_time,
+        "start_time": str(exam.start_time) if exam.start_time else None,
+        "end_time": str(exam.end_time) if exam.end_time else None,
         "room_number": exam.room_number
     }, "Exam updated successfully")
 

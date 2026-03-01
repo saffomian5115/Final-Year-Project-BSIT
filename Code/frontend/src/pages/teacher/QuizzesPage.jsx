@@ -251,7 +251,7 @@ function ResultsModal({ quizId, quizTitle, totalMarks, onClose }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    teacherAPI.getQuizResults(quizId)
+    teacherAPI.getQuizAttempts(quizId)
       .then(r => setResults(r.data.data?.results || []))
       .catch(() => toast.error('Failed to load results'))
       .finally(() => setLoading(false))
@@ -338,7 +338,7 @@ export default function QuizzesPage() {
   useEffect(() => {
     if (!filterOffering) return
     setLoading(true)
-    teacherAPI.getQuizzes(filterOffering)
+    teacherAPI.getOfferingQuizzes(filterOffering)
       .then(r => setQuizzes(r.data.data?.quizzes || []))
       .catch(() => toast.error('Failed to load quizzes'))
       .finally(() => setLoading(false))
@@ -417,7 +417,7 @@ export default function QuizzesPage() {
       )}
 
       {showCreate && offerings.length > 0 && (
-        <CreateQuizModal offerings={offerings} onClose={() => setShowCreate(false)} onSuccess={() => filterOffering && teacherAPI.getQuizzes(filterOffering).then(r => setQuizzes(r.data.data?.quizzes || []))} />
+        <CreateQuizModal offerings={offerings} onClose={() => setShowCreate(false)} onSuccess={() => filterOffering && teacherAPI.getOfferingQuizzes(filterOffering).then(r => setQuizzes(r.data.data?.quizzes || []))} />
       )}
       {resultsModal && (
         <ResultsModal quizId={resultsModal.id} quizTitle={resultsModal.title} totalMarks={resultsModal.total_marks} onClose={() => setResultsModal(null)} />

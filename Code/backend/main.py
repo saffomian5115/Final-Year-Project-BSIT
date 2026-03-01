@@ -16,7 +16,10 @@ app = FastAPI(
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -29,13 +32,20 @@ app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 # Global exception handler
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
+    headers = {
+        "Access-Control-Allow-Origin": request.headers.get("origin") or "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Methods": "*",
+        "Access-Control-Allow-Headers": "*",
+    }
     return JSONResponse(
         status_code=500,
         content={
             "success": False,
             "message": str(exc),
             "error_code": "INTERNAL_ERROR"
-        }
+        },
+        headers=headers
     )
 
 # Routes

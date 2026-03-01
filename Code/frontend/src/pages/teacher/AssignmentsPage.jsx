@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import {
   Plus, FileText, Eye, Award, Loader2, X,
   CheckCircle2, Clock, AlertTriangle, ChevronRight,
-  Download, BookOpen
+  Download, BookOpen, Users
 } from 'lucide-react'
 
 const STATUS_CFG = {
