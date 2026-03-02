@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Skeuomorphic Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Premium Muted Palette */
+            --base-plate: #e0e5ec;
+            --light-source: rgba(255, 255, 255, 0.9);
+            --shadow-ambient: rgba(163, 177, 198, 0.5);
+            --shadow-directional: rgba(163, 177, 198, 0.8);
+            --accent: #4a90e2;
+            --text-primary: #2d3436;
+            --text-secondary: #636e72;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--base-plate);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Subtle Noise Texture Overlay */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+        }
+
+        /* --- THE CHASSIS (Main Card) --- */
+        .login-card {
+            width: 400px;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #e6e9ef 0%, #d8dee9 100%);
+            border-radius: 40px;
+            position: relative;
+            /* Multi-layered Soft Shadows */
+            box-shadow: 
+                20px 20px 60px var(--shadow-ambient), 
+                -20px -20px 60px var(--light-source),
+                inset 1px 1px 1px rgba(255,255,255,0.4); /* Specular Edge */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        /* Glass Reflection Streak */
+        .login-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.03) 55%, transparent 60%);
+            pointer-events: none;
+            border-radius: 40px;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 35px;
+            letter-spacing: 0.2px;
+        }
+
+        /* --- INPUT FIELDS (Inset Depth) --- */
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            margin-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 18px;
+            background: var(--base-plate);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            /* Realistic Inset Depth with Micro-contrast */
+            box-shadow: 
+                inset 6px 6px 10px var(--shadow-directional), 
+                inset -6px -6px 10px var(--light-source),
+                0px 1px 1px rgba(255,255,255,0.3); /* Smooth Inner Bevel highlight */
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        input:focus {
+            box-shadow: 
+                inset 8px 8px 12px var(--shadow-directional), 
+                inset -8px -8px 12px var(--light-source);
+            transform: translateY(1px);
+        }
+
+        /* --- THE BUTTON (Convex Elevation) --- */
+        button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 16px;
+            border: none;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #e6e9ef 0%, #d8dee9 100%);
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            /* High Elevation Hierarchy */
+            box-shadow: 
+                10px 10px 20px var(--shadow-ambient), 
+                -10px -10px 20px var(--light-source);
+            transition: all 180ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                12px 12px 25px var(--shadow-ambient), 
+                -12px -12px 25px var(--light-source);
+            color: #357abd;
+        }
+
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 
+                inset 4px 4px 8px var(--shadow-directional), 
+                inset -4px -4px 8px var(--light-source);
+            transition: all 100ms ease;
+        }
+
+        /* Footer Link Hierarchy */
+        .footer-link {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2>Nexus Admin</h2>
+        <p>Enter your credentials to access the portal</p>
+
+        <div class="input-group">
+            <label>Work Email</label>
+            <input type="email" placeholder="name@company.com" spellcheck="false">
+        </div>
+
+        <div class="input-group">
+            <label>Security Key</label>
+            <input type="password" placeholder="••••••••">
+        </div>
+
+        <button>Sign In to Workspace</button>
+
+        <div class="footer-link">Forgot security key?</div>
+    </div>
+
+</body>
+</html>

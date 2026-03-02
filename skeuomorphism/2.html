@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKEUOMORPHISM · ULTRA REALISTIC LOGIN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #d9d9db;
+            background: radial-gradient(circle at 20% 30%, #edf0f5, #c7ccd6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* BACKGROUND NOISE FOR TEXTURE */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wNCIgLz48L3N2Zz4=');
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* MAIN LOGIN CARD - ULTRA REALISTIC SKEUOMORPHISM */
+        .login-card {
+            width: 420px;
+            background: #e8ebf0;
+            background: linear-gradient(145deg, #f0f3f8 0%, #dde1e9 100%);
+            border-radius: 60px;
+            padding: 3rem 2.5rem;
+            position: relative;
+            z-index: 10;
+            
+            /* MULTI-LAYER SHADOWS FOR DEEPTH */
+            box-shadow: 
+                /* outer depth */
+                0 30px 50px -20px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+                
+                /* top left light */
+                -10px -10px 20px rgba(255, 255, 255, 0.8),
+                
+                /* bottom right dark */
+                12px 12px 25px rgba(0, 0, 0, 0.3),
+                
+                /* inner bevel */
+                inset -3px -3px 8px rgba(0, 0, 0, 0.1),
+                inset 3px 3px 10px rgba(255, 255, 255, 0.9);
+            
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            
+            /* subtle texture */
+            background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.01) 0px, rgba(0,0,0,0.01) 2px, transparent 2px, transparent 8px);
+        }
+
+        /* TERMINAL BAR - YOUR WORDS FROM IMAGE */
+        .terminal-strip {
+            background: #2c3e50;
+            background: linear-gradient(145deg, #1a2632, #2c3e50);
+            border-radius: 100px;
+            padding: 0.7rem 1.5rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem 1.8rem;
+            
+            /* realistic badge effect */
+            box-shadow: 
+                0 8px 0 #0f1a24,
+                0 12px 20px -10px black,
+                inset 0 2px 3px rgba(255,255,255,0.2),
+                inset 0 -2px 3px rgba(0,0,0,0.3);
+            
+            border-bottom: 2px solid #4a617c;
+            position: relative;
+            top: 0;
+            transition: all 0.1s ease;
+        }
+
+        .terminal-strip span {
+            color: #ffd966;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 3px black, 0 0 8px #ffb347;
+            
+            /* engraved look */
+            padding: 0.2rem 0.5rem;
+            border-radius: 30px;
+            background: rgba(0,0,0,0.2);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.5), inset 0 -1px 1px rgba(255,215,0,0.2);
+        }
+
+        /* HEADER */
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #1e2b3c;
+            text-shadow: 
+                0 2px 3px white,
+                0 4px 6px rgba(0,0,0,0.2);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: #3e4f63;
+            font-weight: 500;
+            text-shadow: 0 1px 2px white;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        /* AVATAR / ICON - EXTREMELY REALISTIC */
+        .avatar-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: #d0d9e6;
+            background: radial-gradient(circle at 30% 30%, #f0f4fc, #b8c4d4);
+            border-radius: 50%;
+            
+            /* multi-layer for 3D sphere */
+            box-shadow: 
+                0 15px 20px -8px rgba(0,0,0,0.4),
+                0 0 0 5px #f0f3f8,
+                0 0 0 8px #cbd2e0,
+                inset 0 -5px 10px rgba(0,0,0,0.2),
+                inset 0 5px 12px rgba(255,255,255,0.9);
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #2c3e50;
+            text-shadow: 2px 2px 3px white, -1px -1px 2px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .avatar::after {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        /* INPUT GROUPS - REALISTIC EMBOSSED */
+        .input-group {
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 2px white;
+            padding-left: 1rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1.2rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: #dbe1ec;
+            
+            /* CRITICAL: inset + outer shadows for REAL depth */
+            box-shadow: 
+                inset 3px 3px 8px rgba(0,0,0,0.2),
+                inset -3px -3px 8px rgba(255,255,255,0.9),
+                0 5px 0 #9ca8b9,
+                0 8px 12px rgba(0,0,0,0.2);
+            
+            color: #1a2632;
+            font-weight: 500;
+            transition: all 0.1s ease;
+            position: relative;
+            top: 0;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .input-field:focus {
+            outline: none;
+            box-shadow: 
+                inset 4px 4px 10px rgba(0,0,0,0.25),
+                inset -4px -4px 10px rgba(255,255,255,0.95),
+                0 4px 0 #9ca8b9,
+                0 10px 15px rgba(0,0,0,0.2);
+            
+            background: #e5eaf3;
+        }
+
+        .input-field::placeholder {
+            color: #6a7c94;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        /* PASSWORD HINT / FORGOT */
+        .forgot-password {
+            text-align: right;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-shadow: 0 1px 2px white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.3);
+            box-shadow: inset 0 1px 3px rgba(255,255,255,0.8), inset 0 -1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* LOGIN BUTTON - EXTREMELY PHYSICAL */
+        .login-btn {
+            width: 100%;
+            padding: 1.4rem;
+            border: none;
+            border-radius: 50px;
+            background: #485b73;
+            background: linear-gradient(145deg, #556b84, #3a4a5f);
+            
+            /* MAIN BUTTON SHADOW - PRESS EFFECT */
+            box-shadow: 
+                0 12px 0 #1f2a36,
+                0 15px 20px -8px black,
+                inset 0 2px 3px rgba(255,255,255,0.4),
+                inset 0 -3px 3px rgba(0,0,0,0.3);
+            
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.08s linear;
+            position: relative;
+            top: 0;
+            margin: 1.5rem 0 1.2rem;
+            border: 1px solid #6f8aac;
+            text-shadow: 0 2px 3px black;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(145deg, #5f778f, #445569);
+            box-shadow: 
+                0 10px 0 #1f2a36,
+                0 18px 25px -8px black,
+                inset 0 2px 4px rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .login-btn:active {
+            top: 8px;
+            box-shadow: 
+                0 4px 0 #1f2a36,
+                0 8px 15px -5px black,
+                inset 0 2px 4px rgba(255,255,255,0.3);
+            
+            transform: translateY(4px);
+        }
+
+        /* DIVIDER */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .divider-line {
+            height: 2px;
+            flex: 1;
+            background: #b0bed0;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1), 0 1px 1px white;
+        }
+
+        .divider span {
+            color: #3e4f63;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-shadow: 0 1px 2px white;
+        }
+
+        /* SOCIAL ICONS - REALISTIC BUTTONS */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #d9e0ec;
+            background: radial-gradient(circle at 30% 30%, #f0f5ff, #c7d0de);
+            
+            box-shadow: 
+                0 6px 0 #9aa9bc,
+                0 8px 12px rgba(0,0,0,0.2),
+                inset 0 2px 3px white;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.08s ease;
+            position: relative;
+            top: 0;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+
+        .social-icon:active {
+            top: 4px;
+            box-shadow: 
+                0 2px 0 #9aa9bc,
+                0 5px 8px rgba(0,0,0,0.2),
+                inset 0 2px 3px white;
+        }
+
+        /* REGISTER LINK */
+        .register-link {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.95rem;
+            color: #2c3e50;
+            text-shadow: 0 1px 2px white;
+        }
+
+        .register-link a {
+            color: #1e3a5f;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.4);
+            box-shadow: inset 0 1px 3px white, inset 0 -1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* DECORATIVE ELEMENTS - EXTRA REALISM */
+        .screw {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #a0aaba;
+            box-shadow: 
+                inset 0 2px 3px rgba(255,255,255,0.8),
+                inset 0 -2px 3px rgba(0,0,0,0.3),
+                0 0 0 1px #6a7c94;
+        }
+
+        .screw1 { top: 20px; left: 30px; }
+        .screw2 { top: 20px; right: 30px; }
+        .screw3 { bottom: 20px; left: 30px; }
+        .screw4 { bottom: 20px; right: 30px; }
+
+        .screw::after {
+            content: "—";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            color: #2c3e50;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 500px) {
+            .login-card { width: 100%; padding: 2rem 1.5rem; }
+            .terminal-strip { gap: 0.8rem; }
+            .terminal-strip span { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- MAIN LOGIN CARD - ULTRA REALISTIC SKEUOMORPHISM -->
+    <div class="login-card">
+        <!-- DECORATIVE SCREWS - FOR THAT PREMIUM HARDWARE LOOK -->
+        <div class="screw screw1"></div>
+        <div class="screw screw2"></div>
+        <div class="screw screw3"></div>
+        <div class="screw screw4"></div>
+
+        <!-- TERMINAL STRIP - YOUR WORDS FROM IMAGE -->
+        <div class="terminal-strip">
+            <span>LINK</span>
+            <span>PING</span>
+            <span>PONG</span>
+            <span>DUCK</span>
+            <span>LEFT</span>
+            <span>RIGHT</span>
+            <span>SYNC</span>
+            <span>LPASS</span>
+            <span>HPASS</span>
+            <span>SYNC</span>
+        </div>
+
+        <!-- LOGIN HEADER -->
+        <div class="login-header">
+            <h1>SECURE·SKEUO</h1>
+            <p>physical · tactile · realistic</p>
+        </div>
+
+        <!-- AVATAR WITH 3D SPHERE EFFECT -->
+        <div class="avatar-container">
+            <div class="avatar">🔒</div>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <div class="input-group">
+            <label>USERNAME</label>
+            <input class="input-field" type="text" placeholder="ENTER YOUR USERNAME" value="admin">
+        </div>
+
+        <div class="input-group">
+            <label>PASSWORD</label>
+            <input class="input-field" type="password" placeholder="••••••••" value="12345678">
+        </div>
+
+        <div class="forgot-password">
+            <a href="#">FORGOT?</a>
+        </div>
+
+        <!-- MAIN LOGIN BUTTON - EXTREMELY PHYSICAL PRESS -->
+        <button class="login-btn">LOGIN</button>
+
+        <!-- DIVIDER -->
+        <div class="divider">
+            <div class="divider-line"></div>
+            <span>OR CONTINUE WITH</span>
+            <div class="divider-line"></div>
+        </div>
+
+        <!-- SOCIAL ICONS -->
+        <div class="social-icons">
+            <div class="social-icon">G</div>
+            <div class="social-icon">f</div>
+            <div class="social-icon">in</div>
+            <div class="social-icon">🍎</div>
+        </div>
+
+        <!-- REGISTER LINK -->
+        <div class="register-link">
+            Don't have an account? <a href="#">CREATE ACCOUNT</a>
+        </div>
+
+        <!-- BOTTOM TEXTURE NOTE -->
+        <div style="text-align: center; margin-top: 1.5rem; font-size: 0.7rem; color: #4a5f7a; text-shadow: 0 1px 2px white;">
+            ⚡ skeuomorphism · ultra realism · v1.0
+        </div>
+    </div>
+
+    <!-- SCRIPT FOR PHYSICAL BUTTON FEEDBACK -->
+    <script>
+        // Add physical press effect to button (already in CSS, but extra simulation)
+        document.querySelector('.login-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            this.style.transform = 'translateY(8px)';
+            this.style.boxShadow = '0 4px 0 #1f2a36, 0 8px 15px -5px black, inset 0 2px 4px rgba(255,255,255,0.3)';
+            
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            }, 120);
+        });
+
+        // Add effect to social icons
+        document.querySelectorAll('.social-icon').forEach(icon => {
+            icon.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.style.top = '4px';
+                this.style.boxShadow = '0 2px 0 #9aa9bc, 0 5px 8px rgba(0,0,0,0.2), inset 0 2px 3px white';
+                
+                setTimeout(() => {
+                    this.style.top = '';
+                    this.style.boxShadow = '';
+                }, 120);
+            });
+        });
+    </script>
+</body>
+</html>

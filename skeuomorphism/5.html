@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>skeuo·learn – AI smart LMS</title>
+  <style>
+    /* ===== RESET & BASE (clean modern skeuomorphism) ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    /* neutral warm background – canvas for extruded elements */
+    body {
+      background: #e6e9ef;
+      background: radial-gradient(circle at 20% 30%, #f0f3f8, #d9dee8);
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      color: #2e3b4e;
+      transition: background 0.2s;
+    }
+
+    /* main container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* CSS variables – modern skeu palette (soft neutrals + accent) */
+    :root {
+      --accent: #5f6c84;        /* slate base – calm */
+      --accent-light: #7f8b9f;
+      --accent-dark: #3d4a5e;
+      --surface: #eef2f6;
+      --surface-light: #ffffff;
+      --surface-dark: #d5dce8;
+      --shadow-dark: #b0b8c5;
+      --shadow-light: #ffffff;
+      --text-primary: #1e2a3a;
+      --text-secondary: #42506b;
+      --border-soft: #cbd2df;
+      --extrude-intensity: 8px;
+    }
+
+    /* ===== SKEUOMORPHIC CORE STYLES ===== */
+    .raised-soft {
+      background: var(--surface);
+      border-radius: 2.5rem;
+      box-shadow: 
+        var(--extrude-intensity) var(--extrude-intensity) calc(var(--extrude-intensity)*1.5) var(--shadow-dark),
+        calc(-1*var(--extrude-intensity)/2) calc(-1*var(--extrude-intensity)/2) var(--extrude-intensity) var(--shadow-light),
+        inset 0 1px 2px var(--shadow-light);
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    /* pressed effect (inset) */
+    .pressed, button:active, .pricing-card:active, .nav-item:active, .theme-dot:active {
+      box-shadow: 
+        inset var(--extrude-intensity) var(--extrude-intensity) calc(var(--extrude-intensity)*1.2) var(--shadow-dark),
+        inset calc(-1*var(--extrude-intensity)/2) calc(-1*var(--extrude-intensity)/2) var(--extrude-intensity) var(--shadow-light),
+        0 2px 3px rgba(0,0,0,0.1) !important;
+      transform: translateY(2px);
+    }
+
+    /* navbar – tactile extruded row */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.2rem;
+      margin-bottom: 3rem;
+      background: var(--surface);
+      border-radius: 4rem;
+      box-shadow: 
+        0.6rem 0.6rem 1.2rem var(--shadow-dark),
+        -0.4rem -0.4rem 1rem var(--shadow-light),
+        inset 0 1px 2px white;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.9rem;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-shadow: 2px 2px 3px var(--shadow-light), -1px -1px 2px var(--shadow-dark);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+    }
+    .nav-item {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      padding: 0.5rem 1.2rem;
+      border-radius: 3rem;
+      background: var(--surface);
+      box-shadow: 
+        0.3rem 0.3rem 0.8rem var(--shadow-dark),
+        -0.2rem -0.2rem 0.6rem var(--shadow-light);
+      transition: 0.15s;
+    }
+    .nav-item:hover {
+      box-shadow: 
+        0.2rem 0.2rem 0.6rem var(--shadow-dark),
+        -0.1rem -0.1rem 0.4rem var(--shadow-light);
+    }
+
+    /* color theme selector – physical dots */
+    .theme-panel {
+      display: flex;
+      gap: 0.8rem;
+    }
+    .theme-dot {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: var(--surface);
+      box-shadow: 
+        0.4rem 0.4rem 0.8rem var(--shadow-dark),
+        -0.3rem -0.3rem 0.6rem var(--shadow-light),
+        inset 0 0 0 2px rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: 0.1s;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .theme-dot:hover {
+      transform: scale(1.05);
+    }
+
+    /* hero */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 4rem;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5.2rem);
+      font-weight: 600;
+      color: var(--text-primary);
+      text-shadow: 3px 3px 5px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
+      letter-spacing: -0.02em;
+    }
+    .hero .sub {
+      font-size: 1.4rem;
+      color: var(--text-secondary);
+      margin: 1.5rem 0 2.5rem;
+      text-shadow: 1px 1px 2px white;
+    }
+    .cta-group {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .btn {
+      border: none;
+      background: var(--surface);
+      padding: 1rem 3rem;
+      border-radius: 4rem;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      box-shadow: 
+        0.6rem 0.6rem 1.2rem var(--shadow-dark),
+        -0.5rem -0.5rem 1rem var(--shadow-light);
+      cursor: pointer;
+      transition: 0.1s;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 
+        0.6rem 0.6rem 1.2rem var(--shadow-dark),
+        -0.4rem -0.4rem 1rem var(--shadow-light),
+        0 0 0 2px rgba(255,255,255,0.3) inset;
+    }
+    .btn:active {
+      box-shadow: inset 0.6rem 0.6rem 1.2rem var(--shadow-dark),
+            inset -0.4rem -0.4rem 1rem var(--shadow-light);
+      transform: translateY(4px);
+    }
+
+    /* section titles */
+    .section-title {
+      font-size: 2.8rem;
+      margin: 4rem 0 2rem;
+      color: var(--text-primary);
+      text-shadow: 2px 2px 3px var(--shadow-light), -1px -1px 2px var(--shadow-dark);
+    }
+
+    /* feature panels – extruded cards */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin: 3rem 0;
+    }
+    .feature-card {
+      padding: 2.5rem 1.8rem;
+      background: var(--surface);
+      border-radius: 3rem;
+      box-shadow: 
+        1rem 1rem 2rem var(--shadow-dark),
+        -0.8rem -0.8rem 1.6rem var(--shadow-light),
+        inset 0 1px 3px white;
+      transition: 0.2s;
+    }
+    .feature-card:hover {
+      box-shadow: 
+        0.8rem 0.8rem 1.6rem var(--shadow-dark),
+        -0.6rem -0.6rem 1.2rem var(--shadow-light);
+    }
+    .feature-icon {
+      font-size: 3.8rem;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2));
+    }
+    .feature-card h3 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* AI dashboard section – realistic ui blocks */
+    .dashboard-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 3rem 0;
+      background: var(--surface);
+      border-radius: 3.5rem;
+      padding: 2.5rem;
+      box-shadow: 
+        inset 0.3rem 0.3rem 0.8rem var(--shadow-dark),
+        inset -0.4rem -0.4rem 0.8rem var(--shadow-light),
+        1rem 1rem 2rem var(--shadow-dark);
+    }
+    .stat-block {
+      flex: 1 1 180px;
+      background: var(--surface);
+      border-radius: 2.5rem;
+      padding: 1.8rem 0.8rem;
+      text-align: center;
+      box-shadow: 
+        0.6rem 0.6rem 1.2rem var(--shadow-dark),
+        -0.4rem -0.4rem 0.8rem var(--shadow-light),
+        inset 0 1px 2px white;
+    }
+    .stat-number {
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .progress-bar {
+      height: 1.5rem;
+      background: var(--shadow-dark);
+      border-radius: 3rem;
+      margin: 1.5rem 0;
+      box-shadow: inset 0.2rem 0.2rem 0.5rem #a0aaba, inset -0.2rem -0.2rem 0.4px white;
+    }
+    .progress-fill {
+      width: 70%;
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3rem;
+      box-shadow: 0 0 6px var(--accent-light);
+    }
+
+    /* student progress cards */
+    .progress-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    .student-card {
+      padding: 1.8rem;
+      background: var(--surface);
+      border-radius: 2.8rem;
+      box-shadow: 
+        0.8rem 0.8rem 1.6rem var(--shadow-dark),
+        -0.6rem -0.6rem 1.2rem var(--shadow-light);
+    }
+    .student-name {
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+
+    /* pricing cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin: 3rem 0;
+    }
+    .pricing-card {
+      background: var(--surface);
+      padding: 2.5rem 1.8rem;
+      border-radius: 3rem;
+      box-shadow: 
+        1rem 1rem 2rem var(--shadow-dark),
+        -0.8rem -0.8rem 1.6rem var(--shadow-light);
+      transition: 0.1s;
+      text-align: center;
+    }
+    .pricing-card .price {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 1rem 0;
+    }
+    .pricing-card.popular {
+      box-shadow: 
+        1rem 1rem 2rem var(--shadow-dark),
+        -0.8rem -0.8rem 1.6rem var(--shadow-light),
+        0 0 0 3px var(--accent-light);
+    }
+
+    /* footer */
+    .footer {
+      margin: 5rem 0 1rem;
+      padding: 2.5rem 2rem;
+      background: var(--surface);
+      border-radius: 3rem;
+      box-shadow: 
+        0.8rem 0.8rem 1.6rem var(--shadow-dark),
+        -0.6rem -0.6rem 1.2rem var(--shadow-light);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    /* scroll animation (simple fade) */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* micro details */
+    hr {
+      border: none;
+      height: 2px;
+      background: var(--shadow-dark);
+      box-shadow: 0 1px 2px white;
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- skeuo navigation bar + theme switcher -->
+    <nav class="navbar fade-in">
+      <span class="logo">📘 skeuo·learn</span>
+      <div class="nav-links">
+        <a href="#" class="nav-item">home</a>
+        <a href="#" class="nav-item">features</a>
+        <a href="#" class="nav-item">pricing</a>
+        <a href="#" class="nav-item">contact</a>
+      </div>
+      <div class="theme-panel" id="themeSwitcher">
+        <!-- 8–10 theme dots (presets) -->
+        <div class="theme-dot" style="background:#5f6c84" data-accent="#5f6c84" data-accent-light="#7f8b9f" data-accent-dark="#3d4a5e" data-surface="#eef2f6" data-shadow="#b0b8c5"></div> <!-- slate -->
+        <div class="theme-dot" style="background:#8e7d9c" data-accent="#8e7d9c" data-accent-light="#b2a3c0" data-accent-dark="#6a5a78" data-surface="#eee9f0" data-shadow="#b2aaba"></div> <!-- lavender -->
+        <div class="theme-dot" style="background:#c49a6c" data-accent="#c49a6c" data-accent-light="#dbb48c" data-accent-dark="#9e7a54" data-surface="#f4ede4" data-shadow="#bcb0a2"></div> <!-- warm sand -->
+        <div class="theme-dot" style="background:#6a8e7c" data-accent="#6a8e7c" data-accent-light="#8fb09e" data-accent-dark="#4e6e5e" data-surface="#eaf1ec" data-shadow="#a1b5aa"></div> <!-- sage -->
+        <div class="theme-dot" style="background:#b38b8b" data-accent="#b38b8b" data-accent-light="#d1afaf" data-accent-dark="#8f6969" data-surface="#f7efef" data-shadow="#cbbaba"></div> <!-- dusty rose -->
+        <div class="theme-dot" style="background:#7c9fb0" data-accent="#7c9fb0" data-accent-light="#a2c0d0" data-accent-dark="#5c7d8f" data-surface="#ecf3f7" data-shadow="#afc0ca"></div> <!-- powder blue -->
+        <div class="theme-dot" style="background:#aa9f7c" data-accent="#aa9f7c" data-accent-light="#c7bea2" data-accent-dark="#857b5e" data-surface="#f6f3ea" data-shadow="#c2bbaa"></div> <!-- olive -->
+        <div class="theme-dot" style="background:#b27c9b" data-accent="#b27c9b" data-accent-light="#cfa5c1" data-accent-dark="#8e5e79" data-surface="#f9f0f5" data-shadow="#cdb9c7"></div> <!-- mauve -->
+        <div class="theme-dot" style="background:#7890a5" data-accent="#7890a5" data-accent-light="#9eb3c5" data-accent-dark="#597186" data-surface="#ecf2f8" data-shadow="#b2c2d2"></div> <!-- steel -->
+        <div class="theme-dot" style="background:#b88a6d" data-accent="#b88a6d" data-accent-light="#dbb096" data-accent-dark="#946a50" data-surface="#f8efe8" data-shadow="#cfbcb0"></div> <!-- terracotta -->
+      </div>
+    </nav>
+
+    <!-- hero with big CTA -->
+    <section class="hero fade-in">
+      <h1>AI that learns<br>how <span style="color:var(--accent)">you</span> learn</h1>
+      <div class="sub">real‑time adaptation · tactile analytics · smart feedback</div>
+      <div class="cta-group">
+        <button class="btn btn-primary">start free trial</button>
+        <button class="btn">watch me</button>
+      </div>
+    </section>
+
+    <!-- feature panels (raised) -->
+    <h2 class="section-title fade-in">raised intelligence</h2>
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-icon">📊</div>
+        <h3>AI analytics</h3>
+        <p>extruded insights, predictive learning paths</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">⚡</div>
+        <h3>smart quizzes</h3>
+        <p>adaptive difficulty, tactile feedback</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">📈</div>
+        <h3>progress tracker</h3>
+        <p>physical‑feeling skill bars & timelines</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">🧠</div>
+        <h3>adaptive learning</h3>
+        <p>real‑time course correction</p>
+      </div>
+    </div>
+
+    <!-- AI dashboard section with realistic ui blocks -->
+    <h2 class="section-title fade-in">AI dashboard preview</h2>
+    <div class="dashboard-grid fade-in">
+      <div class="stat-block"><span class="stat-number">84%</span> <br>engagement</div>
+      <div class="stat-block"><span class="stat-number">12</span> <br>active learners</div>
+      <div class="stat-block"><span class="stat-number">4.9</span> <br>ai score</div>
+      <div class="stat-block" style="flex:2 1 260px">
+        <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
+        <div>mastery projection</div>
+      </div>
+    </div>
+
+    <!-- student progress cards -->
+    <h2 class="section-title fade-in">learner progress</h2>
+    <div class="progress-cards">
+      <div class="student-card fade-in">
+        <div class="student-name">alex c.</div>
+        <div class="progress-bar" style="margin:1rem 0"><div class="progress-fill" style="width:92%"></div></div>
+        <span>data science · 92%</span>
+      </div>
+      <div class="student-card fade-in">
+        <div class="student-name">jordan w.</div>
+        <div class="progress-bar" style="margin:1rem 0"><div class="progress-fill" style="width:78%"></div></div>
+        <span>AI ethics · 78%</span>
+      </div>
+      <div class="student-card fade-in">
+        <div class="student-name">taylor k.</div>
+        <div class="progress-bar" style="margin:1rem 0"><div class="progress-fill" style="width:63%"></div></div>
+        <span>deep learning · 63%</span>
+      </div>
+    </div>
+
+    <!-- pricing section -->
+    <h2 class="section-title fade-in">pricing plans</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-in">
+        <h3>essential</h3>
+        <div class="price">$29</div>
+        <p>AI analytics, 3 quizzes</p>
+        <button class="btn" style="margin-top:1.5rem">choose</button>
+      </div>
+      <div class="pricing-card popular fade-in">
+        <h3 style="color:var(--accent)">pro</h3>
+        <div class="price">$49</div>
+        <p>unlimited quizzes + team</p>
+        <button class="btn btn-primary" style="margin-top:1.5rem">get pro</button>
+      </div>
+      <div class="pricing-card fade-in">
+        <h3>academy</h3>
+        <div class="price">$99</div>
+        <p>full suite + api access</p>
+        <button class="btn" style="margin-top:1.5rem">contact</button>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="footer fade-in">
+      <span>© 2025 skeuo·learn — tactile AI lms</span>
+      <span><a href="#" style="color:var(--text-secondary); text-decoration:none;">privacy</a> · <a href="#" style="color:var(--text-secondary); text-decoration:none;">terms</a></span>
+    </footer>
+  </div>
+
+  <script>
+    (function() {
+      // ===== THEME SWITCHER (8–10 presets) =====
+      const root = document.documentElement;
+      const dots = document.querySelectorAll('.theme-dot');
+
+      function setTheme(accent, accentLight, accentDark, surface, shadowDark) {
+        root.style.setProperty('--accent', accent);
+        root.style.setProperty('--accent-light', accentLight);
+        root.style.setProperty('--accent-dark', accentDark);
+        root.style.setProperty('--surface', surface);
+        root.style.setProperty('--shadow-dark', shadowDark);
+        // keep shadow-light consistent (white-ish)
+        root.style.setProperty('--shadow-light', '#ffffff');
+        // also adjust text colors optionally (keep readable)
+        if (accent === '#8e7d9c') root.style.setProperty('--text-primary', '#2a2a3a');
+        else root.style.setProperty('--text-primary', '#1e2a3a');
+      }
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+          const accent = this.dataset.accent;
+          const light = this.dataset.accentLight;
+          const dark = this.dataset.accentDark;
+          const surface = this.dataset.surface;
+          const shadow = this.dataset.shadow;
+          if (accent && light && dark && surface && shadow) {
+            setTheme(accent, light, dark, surface, shadow);
+          }
+          // micro pressed effect
+          this.classList.add('pressed');
+          setTimeout(() => this.classList.remove('pressed'), 150);
+        });
+      });
+
+      // ===== FADE-IN ON SCROLL =====
+      const faders = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+      faders.forEach(el => observer.observe(el));
+
+      // ensure already visible get class
+      window.addEventListener('load', () => {
+        faders.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight-80) {
+            el.classList.add('visible');
+            observer.unobserve(el);
+          }
+        });
+      });
+
+      // pressed effect for any button (already via css)
+    })();
+  </script>
+
+  <!-- ensure subtle border & smoothness -->
+  <style>
+    a, button { text-decoration: none; }
+    .btn, .nav-item, .pricing-card { transition: box-shadow 0.1s, transform 0.1s; }
+    .navbar, .feature-card, .dashboard-grid, .student-card, .footer {
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+  </style>
+</body>
+</html>

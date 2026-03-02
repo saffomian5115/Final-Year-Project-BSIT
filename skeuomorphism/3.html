@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKEUOMORPHISM · PREMIUM LOGIN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #e4e9f2;
+            background: radial-gradient(circle at 30% 30%, #f0f4fc, #d3dae8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* MAIN CARD - CLEAN PREMIUM SKEUOMORPHISM */
+        .login-card {
+            width: 400px;
+            background: #eef2f8;
+            background: linear-gradient(145deg, #f5f9ff 0%, #e3e9f3 100%);
+            border-radius: 48px;
+            padding: 2.5rem 2rem;
+            
+            /* CLEAN SHADOWS - ONLY ESSENTIAL */
+            box-shadow: 
+                /* main depth */
+                0 25px 40px -15px rgba(0, 0, 0, 0.3),
+                /* light source top-left */
+                -8px -8px 16px rgba(255, 255, 255, 0.8),
+                /* dark shadow bottom-right */
+                10px 10px 20px rgba(0, 0, 0, 0.15),
+                /* subtle inner bevel */
+                inset -2px -2px 5px rgba(0, 0, 0, 0.05),
+                inset 2px 2px 8px rgba(255, 255, 255, 0.9);
+            
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        /* TERMINAL STRIP - CLEAN & MINIMAL */
+        .terminal-strip {
+            background: #2c3e50;
+            background: linear-gradient(145deg, #2a3848, #1f2c3a);
+            border-radius: 40px;
+            padding: 0.7rem 1.2rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem 1.5rem;
+            
+            /* CLEAN METAL EFFECT */
+            box-shadow: 
+                0 6px 0 #121a24,
+                0 8px 12px -6px rgba(0,0,0,0.4),
+                inset 0 1px 2px rgba(255,255,240,0.2);
+            
+            border-bottom: 1px solid #4a617c;
+        }
+
+        .terminal-strip span {
+            color: #f2e09f;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            text-shadow: 0 1px 2px black;
+        }
+
+        /* HEADER - MINIMAL */
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #1e2b3c;
+            text-shadow: 0 2px 3px white, 0 3px 5px rgba(0,0,0,0.1);
+            letter-spacing: -0.5px;
+            margin-bottom: 0.3rem;
+        }
+
+        .login-header p {
+            color: #4a5f7a;
+            font-weight: 500;
+            text-shadow: 0 1px 2px white;
+            font-size: 0.9rem;
+        }
+
+        /* INPUT GROUPS - CLEAN */
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            padding-left: 0.8rem;
+            text-shadow: 0 1px 2px white;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1.1rem 1.5rem;
+            border: none;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            background: #e6ecf5;
+            
+            /* CLEAN INSET SHADOW */
+            box-shadow: 
+                inset 3px 3px 7px rgba(0,0,0,0.12),
+                inset -3px -3px 7px rgba(255,255,255,0.9),
+                0 2px 0 #b8c4d4;
+            
+            color: #1e2b3c;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .input-field:focus {
+            outline: none;
+            box-shadow: 
+                inset 4px 4px 8px rgba(0,0,0,0.15),
+                inset -4px -4px 8px rgba(255,255,255,0.95),
+                0 2px 0 #b8c4d4;
+        }
+
+        .input-field::placeholder {
+            color: #7a8ca3;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        /* FORGOT PASSWORD - MINIMAL */
+        .forgot-row {
+            display: flex;
+            justify-content: flex-end;
+            margin: 0.2rem 0 1.8rem;
+        }
+
+        .forgot-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-shadow: 0 1px 2px white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* LOGIN BUTTON - PREMIUM PHYSICAL */
+        .login-btn {
+            width: 100%;
+            padding: 1.3rem;
+            border: none;
+            border-radius: 40px;
+            background: #2c3e50;
+            background: linear-gradient(145deg, #324759, #233241);
+            
+            /* CLEAN BUTTON SHADOW */
+            box-shadow: 
+                0 8px 0 #121a24,
+                0 12px 18px -8px rgba(0,0,0,0.4),
+                inset 0 1px 2px rgba(255,255,255,0.3);
+            
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.08s ease;
+            position: relative;
+            top: 0;
+            border: 1px solid #4a6582;
+            text-shadow: 0 1px 2px black;
+            margin-bottom: 2rem;
+        }
+
+        .login-btn:active {
+            top: 6px;
+            box-shadow: 
+                0 2px 0 #121a24,
+                0 8px 12px -6px rgba(0,0,0,0.4),
+                inset 0 1px 2px rgba(255,255,255,0.2);
+        }
+
+        /* DIVIDER - CLEAN */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .divider-line {
+            height: 1px;
+            flex: 1;
+            background: #b0bed2;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.05), 0 1px 1px white;
+        }
+
+        .divider span {
+            color: #4a5f7a;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-shadow: 0 1px 2px white;
+        }
+
+        /* SOCIAL ICONS - 4 OPTIONS (CLEAN) */
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .social-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #eef2f8;
+            background: radial-gradient(circle at 30% 30%, #f8fcff, #dee5f0);
+            
+            /* CLEAN BUTTON SHADOW */
+            box-shadow: 
+                0 5px 0 #b0bed2,
+                0 8px 12px -6px rgba(0,0,0,0.2),
+                inset 0 1px 2px white;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.08s ease;
+            position: relative;
+            top: 0;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+
+        .social-btn:active {
+            top: 4px;
+            box-shadow: 
+                0 1px 0 #b0bed2,
+                0 5px 8px -4px rgba(0,0,0,0.2),
+                inset 0 1px 2px white;
+        }
+
+        /* REGISTER LINK - MINIMAL */
+        .register-text {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            text-shadow: 0 1px 2px white;
+        }
+
+        .register-text a {
+            color: #1e3a5f;
+            font-weight: 700;
+            text-decoration: none;
+            margin-left: 0.3rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.4);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 450px) {
+            .login-card { padding: 2rem 1.5rem; }
+            .terminal-strip span { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <!-- TERMINAL STRIP - YOUR WORDS (CLEAN) -->
+        <div class="terminal-strip">
+            <span>LINK</span>
+            <span>PING</span>
+            <span>PONG</span>
+            <span>DUCK</span>
+            <span>LEFT</span>
+            <span>RIGHT</span>
+            <span>SYNC</span>
+            <span>LPASS</span>
+            <span>HPASS</span>
+            <span>SYNC</span>
+        </div>
+
+        <!-- HEADER - MINIMAL -->
+        <div class="login-header">
+            <h1>skeuo·login</h1>
+            <p>premium · tactile · secure</p>
+        </div>
+
+        <!-- FORM - ONLY ESSENTIAL -->
+        <div class="input-group">
+            <label>USERNAME</label>
+            <input class="input-field" type="text" placeholder="Enter username" value="skeuo.user">
+        </div>
+
+        <div class="input-group">
+            <label>PASSWORD</label>
+            <input class="input-field" type="password" placeholder="••••••••" value="password">
+        </div>
+
+        <div class="forgot-row">
+            <a href="#" class="forgot-link">Forgot?</a>
+        </div>
+
+        <!-- MAIN BUTTON - PREMIUM PRESS -->
+        <button class="login-btn">SIGN IN</button>
+
+        <!-- DIVIDER - CLEAN -->
+        <div class="divider">
+            <div class="divider-line"></div>
+            <span>or</span>
+            <div class="divider-line"></div>
+        </div>
+
+        <!-- 4 SOCIAL OPTIONS - CLEAN ROW -->
+        <div class="social-row">
+            <div class="social-btn">G</div>
+            <div class="social-btn">f</div>
+            <div class="social-btn">in</div>
+            <div class="social-btn">⌘</div>
+        </div>
+
+        <!-- REGISTER LINK - MINIMAL -->
+        <div class="register-text">
+            New here? <a href="#">Create account</a>
+        </div>
+    </div>
+
+    <!-- MINIMAL SCRIPT FOR PHYSICAL FEEDBACK -->
+    <script>
+        document.querySelector('.login-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            this.style.top = '6px';
+            this.style.boxShadow = '0 2px 0 #121a24, 0 8px 12px -6px rgba(0,0,0,0.4), inset 0 1px 2px rgba(255,255,255,0.2)';
+            
+            setTimeout(() => {
+                this.style.top = '';
+                this.style.boxShadow = '';
+            }, 120);
+        });
+
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.style.top = '4px';
+                this.style.boxShadow = '0 1px 0 #b0bed2, 0 5px 8px -4px rgba(0,0,0,0.2), inset 0 1px 2px white';
+                
+                setTimeout(() => {
+                    this.style.top = '';
+                    this.style.boxShadow = '';
+                }, 120);
+            });
+        });
+    </script>
+</body>
+</html>

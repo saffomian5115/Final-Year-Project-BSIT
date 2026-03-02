@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Nexus Admin | Physics UI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme Tokens - Deepened Contrast */
+            --base-plate: #e0e5ec;
+            --light-source: rgba(255, 255, 255, 0.9);
+            --shadow-ambient: rgba(163, 177, 198, 0.7);
+            --shadow-directional: rgba(138, 149, 168, 0.8);
+            --accent: #2d3436; /* Darker accent */
+            --text-primary: #121212; /* Deeper Black */
+            --text-secondary: #4a4a4a;
+            --input-bg: #e0e5ec;
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme Tokens - Premium Charcoal */
+            --base-plate: #1a1b1e;
+            --light-source: rgba(45, 46, 50, 0.8);
+            --shadow-ambient: rgba(0, 0, 0, 0.6);
+            --shadow-directional: rgba(0, 0, 0, 0.9);
+            --accent: #ffffff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --input-bg: #1a1b1e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        body {
+            background-color: var(--base-plate);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+        }
+
+        /* --- THEME TOGGLE (Top Right) --- */
+        .theme-switcher {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 60px;
+            height: 30px;
+            background: var(--base-plate);
+            box-shadow: inset 3px 3px 6px var(--shadow-directional), inset -3px -3px 6px var(--light-source);
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .toggle-knob {
+            width: 20px;
+            height: 20px;
+            background: var(--base-plate);
+            border-radius: 50%;
+            box-shadow: 2px 2px 5px var(--shadow-ambient), -2px -2px 5px var(--light-source);
+            transform: translateX(0);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        [data-theme="dark"] .toggle-knob {
+            transform: translateX(30px);
+            background: #ffffff;
+        }
+
+        /* --- LOGIN CARD --- */
+        .login-card {
+            width: 400px;
+            padding: 60px 45px;
+            background: var(--base-plate);
+            border-radius: 40px;
+            box-shadow: 25px 25px 50px var(--shadow-ambient), -25px -25px 50px var(--light-source);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            letter-spacing: -0.8px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        /* --- INPUTS --- */
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            margin-left: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 18px 22px;
+            border: none;
+            border-radius: 20px;
+            background: var(--input-bg);
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            box-shadow: inset 6px 6px 12px var(--shadow-directional), inset -6px -6px 12px var(--light-source);
+        }
+
+        input:focus {
+            box-shadow: inset 8px 8px 16px var(--shadow-directional), inset -8px -8px 16px var(--light-source);
+        }
+
+        /* --- BUTTON --- */
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 18px;
+            border: none;
+            border-radius: 20px;
+            background: var(--base-plate);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 8px 8px 16px var(--shadow-ambient), -8px -8px 16px var(--light-source);
+        }
+
+        button:active {
+            box-shadow: inset 4px 4px 8px var(--shadow-directional), inset -4px -4px 8px var(--light-source);
+            transform: scale(0.98);
+        }
+
+        .footer-link {
+            margin-top: 35px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <div class="theme-switcher" onclick="toggleTheme()">
+        <div class="toggle-knob"></div>
+    </div>
+
+    <div class="login-card">
+        <h2>Nexus Portal</h2>
+        <p>Ultra-Premium Administrative Access</p>
+
+        <div class="input-group">
+            <label>Identity</label>
+            <input type="text" placeholder="Admin ID" autocomplete="off">
+        </div>
+
+        <div class="input-group">
+            <label>Security Key</label>
+            <input type="password" placeholder="••••••••">
+        </div>
+
+        <button id="loginBtn">Authorize Session</button>
+
+        <div class="footer-link">Request Emergency Access</div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+        }
+    </script>
+</body>
+</html>
